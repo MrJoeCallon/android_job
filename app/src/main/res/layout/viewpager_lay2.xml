@@ -182,6 +182,8 @@
                     android:id="@+id/mapView"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
+                    android:layout_marginTop="@dimen/text_20"
+                    android:layout_marginBottom="10dp"
                     />
 
             <!--mapbox:style_url="@string/style_mapbox_streets"
