@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical" android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:weightSum="1">
+
+    <RelativeLayout
+            android:id="@+id/top"
+            android:background="@color/hometop"
+            android:layout_alignParentTop="true"
+            android:layout_width="match_parent"
+            android:layout_height="49dp">
+        <ImageView
+                android:src="@drawable/path"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:padding="14dp"
+                android:id="@+id/iv_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        <TextView
+                android:id="@+id/tv_title"
+                android:layout_centerInParent="true"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Share"
+                android:textColor="@color/tabbarselectedColor"
+                android:gravity="center"
+                android:textSize="22sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imagepicker_nextbutton"
+                android:background="@drawable/image_picker_nexticon"
+                android:layout_gravity="right|top"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="20dp"
+        />
+    </RelativeLayout>
+    <include layout="@layout/include_line"/>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:weightSum="1">
+
+
+
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                        xmlns:tools="http://schemas.android.com/tools"
+                        android:id="@+id/contive"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#aaaaaa">
+
+            <maojian.android.walnut.ImagePicker.imageselector_view.ClipImageLayout
+                    android:id="@+id/id_clipImageLayout"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"></maojian.android.walnut.ImagePicker.imageselector_view.ClipImageLayout>
+
+
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <GridView
+            android:layout_width="wrap_content"
+            android:layout_height="262dp"
+            android:numColumns="4"
+            android:horizontalSpacing="2dip"
+            android:verticalSpacing="2dip"
+            android:id="@+id/imagepicker_gridView" />
+</LinearLayout>
