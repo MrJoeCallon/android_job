@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+
+    <color name="RemoteCircleProgress">#00EAAB</color>
+
+    <color name="HomeCountColor">#8A8A8A</color>
+    <color name="HomeCommentContent">#676767</color>
+
+    <color name="CommentUsername">#1C2227</color>
+    <color name="CommentContent">#9D9E9E</color>
+
+    <color name="seperateColor">#C9CACA</color>
+
+    <color name="BlueColor">#0099CC</color>
+    <color name="ggColor">#00EAAB</color>
+    <color name="devicegray">#727171</color>
+    <color name="slidegray">#D0D0D0</color>
+
+    <color name="hometop">#F7F7F7</color>
+    <color name="lightgray">#F2F2F2</color>>
+    <color name="whiteColor">#FFFFFF</color>
+    <color name="tabbarColor">#FFFFFF</color>
+    <color name="tabbarfont">#8C8C8C</color>
+    <color name="statuscolor">#008EFF</color>
+    <color name="tabbarfontselected">#3C4347</color>
+    <color name="tabbarselectedColor">#000000</color>
+    <color name="remindtext_color">#898989</color>
+    <color name="device_label">#030303</color>
+    <color name="device_bottom">#33393D</color>
+
+    <color name="red_color">#FE2851</color>
+
+    <color name="linecolor">#e0e0e0</color>
+    <color name="black">#000000</color>
+
+    <!-- 蓝色主色 -->
+    <color name="C1">#0BB887</color>
+    <!-- 黑色主色 -->
+    <color name="C2">#333333</color>
+    <!-- 黑色辅助色 -->
+    <color name="C3">#666666</color>
+    <!-- 次辅助色 -->
+    <color name="C4">#999999</color>
+    <!-- 提示 不可点击 -->
+    <color name="C5">#CCCCCC</color>
+    <!-- 分割线-->
+    <color name="C6">#DEDEDE</color>
+    <!-- 浅灰色背景,界面背景-->
+    <color name="C7">#F2F2F2</color>
+    <!-- 高亮强调 橙色-->
+    <color name="C8">#FF8112</color>
+    <!--异常 未支付 失败的颜色-->
+    <color name="error_color">#F76447</color>
+
+
+    <color name="colorstyle">#FF333333</color>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="white">#ffffffff</color>
+    <color name="white_gray">#80ffffff</color>
+    <color name="result_view">#b0000000</color>
+    <color name="viewfinder_mask">#60000000</color>
+    <color name="possible_result_points">#c0ffff00</color>
+    <color name="progress_color">#076E51</color>
+    <color name="gray_ce">#CECECE</color>
+    <color name="yellow">#FBA72B</color>
+    <color name="green">#2BBF61</color>
+    <color name="input_hint_color">#6CD4B7</color>
+    <color name="input_line_bg">#B6E9DB</color>
+    <color name="gray_b7">#b7b7b7</color>
+    <color name="gray_4d">#4d4d4d</color>
+    <color name="gray_de">#dedede</color>
+    <color name="gray_78">#787878</color>
+    <color name="gray_b8">#b8b8b8</color>
+    <color name="title_bg_yellow">#FFF6CC</color>
+    <color name="gray_f5">#F5FAFD</color>
+    <color name="transparent">#00000000</color>
+    <color name="red_btn">#E64E4E</color>
+    <color name="item_click">#eaeaea</color>
+    <color name="bg_popup_bottom">#80000000</color>
+    <color name="bg_headerbar_press">#ff22292c</color>
+    <color name="green_text">#13A3FB</color>
+    <color name="yellow_corner">#FF8112</color>
+    <color name="green_corner">#3CC525</color>
+    <color name="e6_corner">#E6E6E6</color>
+
+
+    <color name="gradient_text_color">#999999</color>
+    <color name="gradient_slide_text_color">#FFFFFF</color>
+</resources>

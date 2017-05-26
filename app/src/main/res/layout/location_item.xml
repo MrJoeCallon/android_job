@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:layout_gravity="center_vertical" android:padding="@dimen/text_14"
+                  android:orientation="vertical" android:layout_weight="1">
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:textSize="@dimen/text_18" android:textColor="@color/C2"
+                  android:id="@+id/tv_title"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:textSize="@dimen/text_15" android:textColor="@color/C3"
+                  android:paddingTop="@dimen/text_5"
+                  android:id="@+id/tv_name"/>
+    </LinearLayout>
+    <ImageView android:layout_width="40dp" android:layout_height="40dp"
+               android:layout_marginRight="@dimen/text_12"
+               android:layout_gravity="center_vertical"
+               android:scaleType="centerCrop"
+               android:id="@+id/iv_check"
+               android:padding="@dimen/text_8"
+               android:src="@drawable/check_selector"/>
+</LinearLayout>

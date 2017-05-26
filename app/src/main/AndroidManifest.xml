@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="maojian.android.walnut">
+    <!--<uses-sdk android:minSdkVersion="15"-->
+              <!--android:targetSdkVersion="23"-->
+    <!--/>-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+
+    <uses-feature android:name="android.hardware.camera"/>
+    <uses-feature android:name="android.hardware.camera.autofocus"/>
+
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.READ_LOGS"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+
+    <!-- <uses-feature android:name="android.hardware.bluetooth_le" android:required="true"/> -->
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+
+    <!-- 分享 -->
+    <uses-permission android:name="android.permission.GET_TASKS"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.GET_TASKS"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <!-- //地图包、搜索包需要的基础权限  允许程序打开网络套接字 -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- 允许程序设置内置sd卡的写权限 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <!-- 允许程序获取网络状态 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <!-- 允许程序访问WiFi网络信息 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <!-- 允许程序读写手机状态和身份 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <!-- 允许程序访问CellID或WiFi热点来获取粗略的位置 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+
+    <application
+            android:name=".AnyTimeApplication"
+            android:allowBackup="true"
+            android:icon="@drawable/ic_launcher"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme">
+        <activity
+                android:name=".SplashActivity"
+                android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <service android:name="com.avos.avoscloud.PushService"/>
+
+        <activity
+                android:name=".RemoteControlActivity1"
+                android:configChanges="orientation|screenSize|keyboardHidden"
+                android:screenOrientation="landscape"
+                android:theme="@style/AppBaseTheme">
+        </activity>
+        <activity
+                android:name=".utils.MarkerActivity"
+                android:label="marker_demo"
+                android:screenOrientation="portrait"/>
+        <activity
+                android:name=".LoginActivity"
+                android:screenOrientation="portrait"
+                android:windowSoftInputMode="stateHidden|adjustResize"/>
+        <activity android:name=".RegisterActivity">
+        </activity>
+        <activity
+                android:name=".ForgetPasswordActivity"
+                android:label="@string/app_name">
+        </activity>
+        <activity
+                android:name=".demo.LoginPage"
+                android:label="@string/app_name">
+        </activity>
+        <activity
+                android:name=".MainActivity"
+                android:label="@string/app_name"
+                android:launchMode="singleInstance"
+                android:screenOrientation="portrait"
+                android:windowSoftInputMode="adjustPan|stateHidden">
+        </activity>
+        <activity
+                android:name=".FunspotActivity"
+                android:screenOrientation="portrait">
+        </activity>
+        <activity
+                android:name=".CommentActivity"
+                android:theme="@style/AppBaseTheme">
+        </activity>
+        <activity
+                android:name=".DetailActivity"
+                android:theme="@style/AppBaseTheme">
+        </activity>
+        <activity
+                android:name=".customProfileActivity"
+                android:theme="@style/AppBaseTheme">
+        </activity>
+        <activity
+                android:name=".EditprofileActivity"
+                android:theme="@style/AppBaseTheme">
+        </activity>
+        <activity
+                android:name=".ProfileFollowActivity"
+                android:theme="@style/AppBaseTheme">
+        </activity>
+        <activity
+                android:name=".DeviceActivity"
+                android:launchMode="singleInstance"
+                android:screenOrientation="portrait">
+        </activity>
+        <activity
+                android:name=".TutVideoActivity"
+                android:screenOrientation="landscape">
+        </activity>
+        <activity
+                android:name=".FeedbackActivity"
+                android:screenOrientation="portrait">
+        </activity>
+        <activity
+                android:name=".RemoteControlActivity"
+                android:configChanges="orientation|screenSize|keyboardHidden"
+                android:screenOrientation="portrait"
+                android:theme="@style/AppBaseTheme">
+        </activity>
+        <activity
+                android:name=".CameraActivity"
+                android:configChanges="orientation|screenSize"
+                android:screenOrientation="portrait">
+        </activity>
+        <activity
+                android:name=".me.ProFileCameraActivity"
+                android:configChanges="orientation|screenSize"
+                android:screenOrientation="portrait">
+        </activity>
+        <activity
+                android:name=".ImagePicker.ImagePickerActivity"
+                android:screenOrientation="portrait">
+        </activity>
+        <activity
+                android:name=".ImagePicker.ProfilePickerActivity"
+                android:screenOrientation="portrait">
+        </activity>
+        <activity
+                android:name=".UploadActivity"
+                android:screenOrientation="portrait">
+        </activity>
+        <activity
+                android:name=".OrderActivity"
+                android:screenOrientation="portrait">
+        </activity>
+        <activity
+                android:name=".DiscountActivity"
+                android:screenOrientation="portrait">
+        </activity>
+        <activity
+                android:name=".StoreWebActivity"
+                android:theme="@style/AppBaseTheme">
+        </activity>
+        <activity
+                android:name="com.facebook.FacebookActivity"
+                android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+                android:label="@string/app_name"/>
+
+        <meta-data
+                android:name="com.facebook.sdk.ApplicationId"
+                android:value="@string/facebook_app_id"/>
+
+        <service
+                android:name=".BluetoothLeService"
+                android:enabled="true"/>
+        <service android:name="com.mapbox.mapboxsdk.telemetry.TelemetryService"/>
+
+        <!-- <activity -->
+        <!-- android:name="com.tencent.tauth.AuthActivity" -->
+        <!-- android:launchMode="singleTask" -->
+        <!-- android:noHistory="true" > -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.intent.action.VIEW" /> -->
+
+
+        <!-- <category android:name="android.intent.category.DEFAULT" /> -->
+        <!-- <category android:name="android.intent.category.BROWSABLE" /> -->
+        <!-- </intent-filter> -->
+        <!-- </activity> -->
+
+        <provider
+                android:name="com.facebook.FacebookContentProvider"
+                android:authorities="com.facebook.app.FacebookContentProvider437836289760648"
+                android:exported="true"/>
+
+        <receiver android:name="com.avos.avoscloud.AVBroadcastReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.USER_PRESENT"/>
+            </intent-filter>
+        </receiver>
+
+        <meta-data
+                android:name="io.fabric.ApiKey"
+                android:value="609b90302151ce12583665911134a5dd04c7995b"/>
+        <meta-data
+                android:name="com.amap.api.v2.apikey"
+                android:value="c06cb65f021e7a6653ee486f286d5b78"/>
+        <!-- 分享 -->
+        <activity
+                android:name="com.mob.tools.MobUIShell"
+                android:configChanges="keyboardHidden|orientation|screenSize"
+                android:screenOrientation="portrait"
+                android:theme="@android:style/Theme.Translucent.NoTitleBar"
+                android:windowSoftInputMode="stateHidden|adjustResize">
+            <intent-filter>
+                <data android:scheme="tencent100371282"/>
+
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+
+            <!-- 调用新浪原生SDK，需要注册的回调activity -->
+            <intent-filter>
+                <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+
+            <!-- 集成line客户端登录授权，需要添如下格式的过滤器 -->
+            <intent-filter>
+                <data android:scheme="line.1477692153"/>
+
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <!-- 微信分享回调 -->
+        <activity
+                android:name=".wxapi.WXEntryActivity"
+                android:configChanges="keyboardHidden|orientation|screenSize"
+                android:exported="true"
+                android:screenOrientation="portrait"
+                android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <activity android:name=".me.ChangePasswordActivity">
+        </activity>
+        <activity android:name=".home.addpost.AddLocationActivity">
+        </activity>
+        <activity android:name=".login.EmailActivity">
+        </activity>
+        <activity
+                android:name=".discover.search.SearchActivity"
+                android:windowSoftInputMode="stateVisible">
+        </activity>
+        <activity android:name=".me.LinkAccountActivity">
+        </activity>
+        <activity android:name=".TestActivity">
+        </activity>
+        <activity
+                android:name=".VideoPlayerActivity"
+                android:screenOrientation="landscape">
+        </activity>
+        <activity
+                android:name=".LoginDialogActivity"
+                android:screenOrientation="portrait"
+                android:theme="@android:style/Theme.Translucent.NoTitleBar"
+                android:windowSoftInputMode="stateHidden|adjustResize">
+        </activity>
+        <activity android:name=".MapActivity">
+        </activity>
+    </application>
+
+</manifest>

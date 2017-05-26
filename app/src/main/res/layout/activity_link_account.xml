@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context="maojian.android.walnut.me.LinkAccountActivity">
+
+    <include layout="@layout/include_title_back"/>
+    <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/text_40">
+        <include layout="@layout/include_line"/>
+    </RelativeLayout>
+    <RelativeLayout android:id="@+id/facebook"
+                    style="@style/PersonInfoRelativeItem">
+        <TextView
+                style="@style/PersonInfoLeftTextItem"
+                android:text="Facebook"
+                android:id="@+id/tv_facebook"
+                android:textColor="@color/C2"
+                android:drawableLeft="@drawable/thirdparty_facebook"
+                android:drawablePadding="@dimen/text_8"/>
+        <ImageView style="@style/SettingImageview14"/>
+
+        <View android:layout_width="match_parent"
+              android:layout_height="0.5dp"
+              android:background="@color/linecolor"
+              android:layout_alignParentBottom="true"
+        />
+    </RelativeLayout>
+    <RelativeLayout android:id="@+id/twitter"
+                    style="@style/PersonInfoRelativeItem">
+        <TextView
+                style="@style/PersonInfoLeftTextItem"
+                android:text="Twitter"
+                android:id="@+id/tv_twitter"
+                android:textColor="@color/C2"
+                android:drawableLeft="@drawable/thirdparty_twitter"
+                android:drawablePadding="@dimen/text_8"/>
+        <ImageView style="@style/SettingImageview14"/>
+
+        <View android:layout_width="match_parent"
+              android:layout_height="0.5dp"
+              android:background="@color/linecolor"
+              android:layout_alignParentBottom="true"
+        />
+    </RelativeLayout>
+
+
+    <RelativeLayout android:id="@+id/wechat"
+                    style="@style/PersonInfoRelativeItem">
+        <TextView
+                style="@style/PersonInfoLeftTextItem"
+                android:text="Wechat"
+                android:id="@+id/tv_wechat"
+                android:textColor="@color/C2"
+                android:drawableLeft="@drawable/thirdparty_wechat"
+                android:drawablePadding="@dimen/text_8"/>
+        <ImageView style="@style/SettingImageview14"/>
+
+        <View android:layout_width="match_parent"
+              android:layout_height="0.5dp"
+              android:background="@color/linecolor"
+              android:layout_alignParentBottom="true"
+        />
+    </RelativeLayout>
+    <RelativeLayout android:id="@+id/weibo"
+                    style="@style/PersonInfoRelativeItem">
+        <TextView
+                style="@style/PersonInfoLeftTextItem"
+                android:text="Weibo"
+                android:id="@+id/tv_weibo"
+                android:drawableLeft="@drawable/thirdparty_weibo"
+                android:textColor="@color/C2"
+                android:drawablePadding="@dimen/text_8"/>
+        <ImageView style="@style/SettingImageview14"/>
+
+        <View android:layout_width="match_parent"
+              android:layout_height="0.5dp"
+              android:background="@color/linecolor"
+              android:layout_alignParentBottom="true"
+        />
+    </RelativeLayout>
+
+
+</LinearLayout>

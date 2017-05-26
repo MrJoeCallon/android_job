@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/whiteColor"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_title_back"/>
+
+    <ListView
+        android:id="@+id/comment_listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="80dp"
+        android:layout_gravity="left|top"
+        android:layout_marginTop="60dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:id="@+id/bottom_view"
+
+        android:weightSum="1">
+        <ImageView
+            android:id="@+id/comment_img"
+            android:layout_width="30dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/comment_transfericon"
+            android:layout_marginLeft="10dp" />
+        <EditText
+            android:id="@+id/comment_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:hint="Add a comment..."
+            android:maxLines="2"
+            android:background="@null"
+            android:maxLength="200"
+            android:textSize="@dimen/text_16"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1" />
+        <Button
+            android:id="@+id/comment_send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="POST"
+            android:textColor="#E4E4E4"
+            android:textStyle="bold"
+            android:textSize="@dimen/text_22"
+            android:background="@android:color/white"
+            android:layout_marginLeft="20dp"
+        android:layout_marginRight="@dimen/text_10"/>
+    </LinearLayout>
+<View android:layout_width="match_parent" android:layout_height="@dimen/text_05"
+android:background="@color/C6" android:layout_above="@id/bottom_view"/>
+</RelativeLayout>

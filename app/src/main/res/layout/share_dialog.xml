@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:background="@drawable/actionsheet_single_selector"
+                  android:orientation="vertical">
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingTop="18dp"
+                android:text="Share to"
+                android:textColor="@color/C3"
+                android:textSize="@dimen/text_18"/>
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="110dp"
+                      android:orientation="horizontal">
+            <RelativeLayout android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:id="@+id/rl_weixin_fri"
+                            android:layout_weight="1">
+                <ImageView android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:src="@drawable/xmlid_83_"
+                           android:layout_centerInParent="true"
+                           android:gravity="center"
+                />
+            </RelativeLayout>
+            <RelativeLayout android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:id="@+id/rl_weixin_py"
+                            android:layout_weight="1">
+                <ImageView android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:src="@drawable/group10578"
+                           android:layout_centerInParent="true"
+                           android:gravity="center"
+                />
+            </RelativeLayout>
+            <RelativeLayout android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:id="@+id/rl_weibo0"
+                            android:layout_weight="1">
+                <ImageView android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:src="@drawable/xmlid_46_"
+                           android:layout_centerInParent="true"
+                           android:gravity="center"
+                />
+            </RelativeLayout>
+
+            <RelativeLayout android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:id="@+id/rl_weibo"
+                            android:layout_weight="1">
+                <ImageView android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:src="@drawable/xmlid_30_"
+                           android:layout_centerInParent="true"
+                           android:gravity="center"
+                />
+            </RelativeLayout>
+        </LinearLayout>
+        <View android:layout_width="match_parent" android:layout_height="@dimen/text_05" android:id="@+id/lineview"
+              android:background="@color/C4"/>
+        <TextView
+                android:id="@+id/txt_report"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/text_48"
+                android:gravity="center"
+                android:text="Report"
+                android:textColor="@color/error_color"
+                android:textSize="@dimen/text_16"/>
+    </LinearLayout>
+    <TextView
+            android:id="@+id/txt_cancel"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/text_48"
+            android:gravity="center"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/actionsheet_single_selector"
+            android:text="@string/app_cancel"
+            android:textColor="@color/C2"
+            android:textSize="@dimen/text_16"/>
+</LinearLayout>

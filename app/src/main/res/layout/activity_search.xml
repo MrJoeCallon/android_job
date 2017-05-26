@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/whiteColor"
+        android:orientation="vertical">
+    <LinearLayout android:layout_width="match_parent"
+                  android:background="@color/C7"
+                  android:orientation="horizontal"
+                  android:layout_height="wrap_content">
+        <RelativeLayout android:layout_width="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:layout_margin="@dimen/text_10"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/search_corners"
+                        android:orientation="horizontal">
+
+            <EditText android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:singleLine="true"
+                      android:id="@+id/et_search"
+                      android:drawablePadding="@dimen/text_5"
+                      android:drawableLeft="@drawable/search"
+                      android:textSize="@dimen/text_15"
+                      android:imeOptions="actionSearch"
+                      android:textColorHint="@color/C5"
+                      android:hint="Search"
+                      android:layout_centerInParent="true"
+                      android:background="@null"
+            />
+        </RelativeLayout>
+        <TextView android:layout_width="wrap_content"
+                  android:textColor="@color/whiteColor"
+                  android:text="back"
+                  android:paddingLeft="15dp"
+                  android:paddingRight="15dp"
+                  android:layout_height="40dp"
+                  android:id="@+id/back"
+                  android:textSize="@dimen/text_16"
+                  android:layout_marginTop="@dimen/text_10"
+                  android:layout_marginRight="@dimen/text_10"
+                  android:gravity="center_vertical"
+                  android:background="@drawable/blue_blue_5"
+        />
+    </LinearLayout>
+    <include layout="@layout/include_line"/>
+
+    <maojian.android.walnut.ReFlashListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/listview"
+            android:divider="@null"
+            android:dividerHeight="0dp"
+    />
+
+</LinearLayout>

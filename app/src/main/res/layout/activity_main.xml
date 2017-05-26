@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/id_content"
+>
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:layout_width="fill_parent"
+                  android:layout_height="48dp" android:orientation="horizontal"
+                  android:id="@+id/bottom_tabbar"
+                  android:background="@color/tabbarColor"
+                  android:layout_alignParentBottom="true">
+        <RelativeLayout android:layout_width="wrap_content" android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:id="@+id/bottom_tabbar_rb_0">
+            <ImageView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/home_selector"
+            />
+        </RelativeLayout>
+        <RelativeLayout android:layout_width="wrap_content" android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:id="@+id/bottom_tabbar_rb_1">
+
+            <ImageView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/tabbarColor"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/discover_selector"
+                    android:checked="false"/>
+        </RelativeLayout>
+        <RelativeLayout android:layout_width="wrap_content" android:layout_height="match_parent"
+                        android:layout_weight="1" android:id="@+id/bottom_tabbar_rb_2">
+            <ImageView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/deviceselected"
+                    android:id="@+id/device_logo"
+                    android:layout_gravity="center"
+            />
+        </RelativeLayout>
+        <RelativeLayout android:layout_width="wrap_content" android:layout_height="match_parent"
+                        android:layout_weight="1" android:id="@+id/bottom_tabbar_rb_3">
+            <ImageView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/message_selector"/>
+        </RelativeLayout>
+        <RelativeLayout android:layout_width="wrap_content" android:layout_height="match_parent"
+                        android:layout_weight="1" android:id="@+id/bottom_tabbar_rb_4">
+            <ImageView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/me_selector"/>
+        </RelativeLayout>
+    </LinearLayout>
+    <View android:layout_width="match_parent" android:layout_height="0.5dp"
+          android:layout_above="@+id/bottom_tabbar" android:id="@+id/bottom_line"
+          android:background="@color/C6"/>
+    <FrameLayout
+            android:id="@+id/fragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_above="@+id/bottom_line"></FrameLayout>
+</RelativeLayout>
