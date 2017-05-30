@@ -16,7 +16,7 @@ public interface IndexView {
     void setLoginSuccess(IndexBean indexBean);
 
 
-    void setLoginFail(String errInfo);
+    void setLoginFail(String errInfo,int page);
 
     void setUpLoadPicSuccess(UpLoadPicBean upLoadPicBean,PostSuccessEvent postSuccessEvent);
 

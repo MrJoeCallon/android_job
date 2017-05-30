@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_margin="14dp"
+            android:layout_margin="12dp"
             android:layout_weight="1">
         <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content">
             <TextView
@@ -50,7 +50,14 @@
                 android:text="Medium Text"
                 android:textColor="@color/CommentContent"
                 android:id="@+id/comment_content"
-                android:layout_marginTop="3dp"
+                android:textSize="15dp"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Reply"
+                android:textColor="@color/CommentContent"
                 android:textSize="15dp"/>
     </LinearLayout>
 

@@ -33,7 +33,7 @@ public class IndexPresenter extends Presenter<IndexView> {
     }
 
 
-    public void getIndex(int page, boolean showLoading) {
+    public void getIndex(final int page, boolean showLoading) {
         RequestParams params = new RequestParams();
         if (UserInfos.getLoginBean() != null)
             params.put("user_id", UserInfos.getLoginBean().getUser_id());
@@ -52,7 +52,7 @@ public class IndexPresenter extends Presenter<IndexView> {
             @Override
             public void requestError(String e) {
                 if (mView != null) {
-                    mView.setLoginFail(e);
+                    mView.setLoginFail(e,page);
                 }
             }
         });

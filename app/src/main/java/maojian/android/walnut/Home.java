@@ -130,7 +130,10 @@ public class Home extends Fragment implements IndexView {
 
             @Override
             public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
-                getWallImages(indexBean.getNew_page() + 1, false);
+                if (indexBean == null)
+                    getWallImages(0, false);
+                else
+                    getWallImages(indexBean.getNew_page() + 1, false);
 //                if (hasNext.equals("true")) {
 //                    isRefresh = 2;
 //                    hostPage++;
@@ -313,14 +316,14 @@ public class Home extends Fragment implements IndexView {
     }
 
     @Override
-    public void setLoginFail(String errInfo) {
+    public void setLoginFail(String errInfo, int page) {
         lv.onRefreshComplete();
         if (TextUtils.isEmpty(errInfo))
             errInfo = "Loading Fail";
         if (getActivity() != null)
             Toast.makeText(getActivity(), errInfo, Toast.LENGTH_SHORT).show();
 
-        if (errInfo.equals("No data") && postobjectArray != null) {
+        if (errInfo.equals("No data") && postobjectArray != null && page == 0) {
             indexBean = null;
             SharedPreferencesUtils.removeData(getActivity(), "IndexBean");
             postobjectArray.clear();
