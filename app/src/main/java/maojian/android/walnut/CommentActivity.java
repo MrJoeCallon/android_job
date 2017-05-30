@@ -1,6 +1,9 @@
 package maojian.android.walnut;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -34,6 +37,8 @@ import com.nostra13.universalimageloader.core.display.CircleBitmapDisplayer;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
+import maojian.android.walnut.data.UserInfos;
+import maojian.android.walnut.home.IndexBean;
 import maojian.android.walnut.home.comment.CommentList;
 import maojian.android.walnut.home.comment.CommentPresenter;
 import maojian.android.walnut.home.comment.CommentView;
@@ -63,6 +68,9 @@ public class CommentActivity extends AnyTimeActivity implements CommentView {
     private String post_id;
     Button postButton;
     EditText searchEdit;
+    private String reply_user_id;
+
+    private IndexBean.IndexListBean detailObject;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +78,7 @@ public class CommentActivity extends AnyTimeActivity implements CommentView {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_comment);
         commentPresenter = new CommentPresenter(this, this);
-
+        detailObject = (IndexBean.IndexListBean) getIntent().getSerializableExtra("post");
 
         setTitle("Comment");
         findViewById(R.id.comment_img).setOnClickListener(this);
@@ -98,6 +106,8 @@ public class CommentActivity extends AnyTimeActivity implements CommentView {
                         } else {
                             postButton.setTextColor(Color.parseColor("#E4E4E4"));
                             postButton.setEnabled(false);
+                            reply_user_id = "";
+                            searchEdit.setHint("Add a comment...");
                         }
 
 
@@ -197,7 +207,7 @@ public class CommentActivity extends AnyTimeActivity implements CommentView {
                 boolean isOpen = imm.isActive();//isOpen若返回true，则表示输入法打开
                 if (isOpen) {
                     imm.hideSoftInputFromWindow(searchEdit.getWindowToken(), 0);//从控件所在的窗口中隐藏
-                }else {
+                } else {
                     finish();
                 }
                 break;
@@ -206,7 +216,7 @@ public class CommentActivity extends AnyTimeActivity implements CommentView {
                 if (TextUtils.isEmpty(content)) {
                     return;
                 }
-                commentPresenter.addComment(content, post_id, new RequestListener() {
+                commentPresenter.addComment(content, post_id, reply_user_id, new RequestListener() {
                     @Override
                     public void requestSuccess(String json) {
                         Log.d("addComment", json);
@@ -234,9 +244,50 @@ public class CommentActivity extends AnyTimeActivity implements CommentView {
             messageadapter = new iMessageAdapter(CommentActivity.this);
             // lv.setAdapter(messageadapter);
             //   messageadapter.notifyDataSetChanged();
-
+            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.showSoftInput(searchEdit, 1);
+                    reply_user_id = postobjectArray.get(position).getClass_id();
+                    searchEdit.setHint("@ " + postobjectArray.get(position).getClass_name());
+                }
+            });
+            lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+                @Override
+                public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                    if (postobjectArray.get(position).getClass_id().equals(UserInfos.getLoginBean().getUser_id())
+                            || detailObject.getClass_id().equals(UserInfos.getLoginBean().getUser_id())) {
+                        showDelete("Delete this comment?", CommentActivity.this, postobjectArray.get(position).getComments_id());
+                    }
+                    return true;
+                }
+            });
             lv.setAdapter(messageadapter);
         }
+    }
+
+    public void showDelete(String errorMessage, Activity activity, final String comments_id) {
+        new AlertDialog.Builder(activity)
+                .setTitle(
+                        activity.getResources().getString(
+                                R.string.dialog_message_title))
+                .setMessage(errorMessage)
+                .setNegativeButton(android.R.string.ok,
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,
+                                                int which) {
+                                dialog.dismiss();
+                                commentPresenter.delComment(comments_id);
+                            }
+                        })
+                .setPositiveButton(android.R.string.cancel,
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,
+                                                int which) {
+                                dialog.dismiss();
+                            }
+                        }).show();
     }
 
     @Override
@@ -341,8 +392,10 @@ public class CommentActivity extends AnyTimeActivity implements CommentView {
 //                }
 
 //                final AVUser fromuser = (AVUser) post.get("fromUser");
-
-                holder.username.setText(post.getClass_name());
+                if (TextUtils.isEmpty(post.getReply_id()))
+                    holder.username.setText(post.getClass_name());
+                else
+                    holder.username.setText(post.getClass_name() + " @ " + post.getReply_name());
 
                 holder.messagecontent.setText(post.getComments_content());
 

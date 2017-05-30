@@ -37,6 +37,7 @@ public class BaseConstant {
     public static String discoverIndex = baseServiceUrl + "index/discoverIndex";
     public static String like = baseServiceUrl + "index/like";
     public static String commentList = baseServiceUrl + "index/commentList";
+    public static String deleteComment = baseServiceUrl + "index/deleteComment";
     public static String postImgUpload = baseServiceUrl + "user/postImgUpload";
     public static String uoloadUserHeadImg = baseServiceUrl + "user/uoloadUserHeadImg";
     public static String getLocationList = baseServiceUrl + "index/getLocationList";

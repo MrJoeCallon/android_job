@@ -2,6 +2,7 @@ package maojian.android.walnut.home.comment;
 
 
 import android.content.Context;
+import android.text.TextUtils;
 import maojian.android.walnut.BaseConstant;
 import maojian.android.walnut.R;
 import maojian.android.walnut.data.UserInfos;
@@ -55,12 +56,39 @@ public class CommentPresenter extends Presenter<CommentView> {
         });
     }
 
+
+    public void delComment(String comments_id) {
+        RequestParams params = new RequestParams();
+//        if (UserInfos.getLoginBean() != null)
+        params.put("comments_id", comments_id);
+        if (UserInfos.getLoginBean() != null)
+            params.put("user_id", UserInfos.getLoginBean().getUser_id());
+        // 发送请求
+        mVolleyRequest.post(context, BaseConstant.deleteComment, CommentList.class, params, context.getResources().getString(R.string.login_tips), new RequestBeanListener<CommentList>() {
+            @Override
+            public void requestSuccess(CommentList result) {
+                if (mView != null) {
+                    mView.setSuccess(result);
+                }
+            }
+
+            @Override
+            public void requestError(String e) {
+                if (mView != null) {
+                    mView.setFail(e);
+                }
+            }
+        });
+    }
+
     /**
      */
-    public void addComment(String comments_content, String post_id, RequestListener requestListener) {
+    public void addComment(String comments_content, String post_id, String reply_user_id, RequestListener requestListener) {
         RequestParams params = new RequestParams();
         if (UserInfos.getLoginBean() != null)
             params.put("user_id", UserInfos.getLoginBean().getUser_id());
+        if (!TextUtils.isEmpty(reply_user_id))
+            params.put("reply_user_id", reply_user_id);
         params.put("comments_content", comments_content + "");
         params.put("post_id", post_id + "");
 

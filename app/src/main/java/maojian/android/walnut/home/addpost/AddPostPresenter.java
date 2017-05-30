@@ -119,9 +119,10 @@ public class AddPostPresenter extends Presenter<AddPostView> {
 
     public void addLocation(RequestBeanListener requestListener) {
         RequestParams params = new RequestParams();
-        params.put("lng", BaseConstant.longitude + "");
-        params.put("lat", BaseConstant.latitude + "");
-
+//        params.put("lng", BaseConstant.longitude + "");
+//        params.put("lat", BaseConstant.latitude + "");
+        params.put("lng", "-102.254.674");
+        params.put("lat", "50.563313");
         // 发送请求
         mVolleyRequest.post(context, BaseConstant.getLocationList, LocationBean.class, params,
                 context.getResources().getString(R.string.login_tips), requestListener);

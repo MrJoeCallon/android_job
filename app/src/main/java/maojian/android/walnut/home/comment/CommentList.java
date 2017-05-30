@@ -40,6 +40,36 @@ public class CommentList implements Serializable {
     private List<CommentBean> data;
 
     public class CommentBean implements Serializable {
+
+        private String comments_id;
+
+        public String getComments_id() {
+            return comments_id;
+        }
+
+        public void setComments_id(String comments_id) {
+            this.comments_id = comments_id;
+        }
+
+        private String reply_name;
+
+        public String getReply_name() {
+            return reply_name;
+        }
+
+        public void setReply_name(String reply_name) {
+            this.reply_name = reply_name;
+        }
+
+        public String getReply_id() {
+            return reply_id;
+        }
+
+        public void setReply_id(String reply_id) {
+            this.reply_id = reply_id;
+        }
+
+        private  String reply_id;
         private String class_id;//":398,
 
         public String getClass_id() {

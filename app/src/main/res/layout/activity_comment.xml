@@ -28,6 +28,7 @@
             android:layout_width="30dp"
             android:layout_height="45dp"
             android:layout_gravity="center_vertical"
+            android:visibility="gone"
             android:src="@drawable/comment_transfericon"
             android:layout_marginLeft="10dp" />
         <EditText
