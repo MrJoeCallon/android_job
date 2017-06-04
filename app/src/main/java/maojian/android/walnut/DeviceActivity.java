@@ -99,7 +99,7 @@ public class DeviceActivity extends Activity implements SlideBar.OnTriggerListen
 
     TextView device_remind;
 
-    TextView beginnerText,tv_unluck_tips;
+    TextView beginnerText, tv_unluck_tips;
     TextView sportText;
     TextView proText;
 
@@ -144,7 +144,7 @@ public class DeviceActivity extends Activity implements SlideBar.OnTriggerListen
     private static DeviceActivity deviceActivity;
     private static BluetoothLeService mBluetoothLeService;
 
-    public static boolean mConnected = false;
+    public boolean mConnected = false;
 
     private ArrayList<ArrayList<BluetoothGattCharacteristic>> mGattCharacteristics =
             new ArrayList<ArrayList<BluetoothGattCharacteristic>>();
@@ -178,7 +178,7 @@ public class DeviceActivity extends Activity implements SlideBar.OnTriggerListen
 
     private int trainmode;
 
-    private LinearLayout device_bottomlayout,luckdevice_bottomlayout;
+    private LinearLayout device_bottomlayout, luckdevice_bottomlayout;
     private LinearLayout diconnnected_layout;
     private RelativeLayout device_middlelayout;
 
@@ -236,7 +236,7 @@ public class DeviceActivity extends Activity implements SlideBar.OnTriggerListen
                     public void onClick(View view) {
 
                         //mBluetoothLeService.disconnect();
-
+                        MainActivity.mConnected = mConnected;
                         startActivity(new Intent(DeviceActivity.this, MainActivity.class));
 //                        pause_connect = true;
 //                        DeviceActivity.this.finish();
@@ -710,7 +710,7 @@ public class DeviceActivity extends Activity implements SlideBar.OnTriggerListen
         device_remind = (TextView) findViewById(R.id.device_remind);
         device_remind.setFocusable(true);
         if (UserInfos.getUserBean() != null && UserInfos.getUserBean().getUserinfo() != null && !TextUtils.isEmpty(UserInfos.getUserBean().getUserinfo().getSpectra_name()))
-            device_remind.setText(UserInfos.getUserBean().getUserinfo().getSpectra_name()+"'s SPECTRA Pro");
+            device_remind.setText(UserInfos.getUserBean().getUserinfo().getSpectra_name() + "'s SPECTRA Pro");
 //        Log.e("password setup", "current user: "+AVUser.getCurrentUser().getObjectId());
 //
 //        hexStringToPassword(AVUser.getCurrentUser().getObjectId());
@@ -720,7 +720,7 @@ public class DeviceActivity extends Activity implements SlideBar.OnTriggerListen
 
         beginnerText = (TextView) findViewById(R.id.device_speedmode_beginner);
         sportText = (TextView) findViewById(R.id.device_speedmode_sport);
-        tv_unluck_tips= (TextView) findViewById(R.id.tv_unluck_tips);
+        tv_unluck_tips = (TextView) findViewById(R.id.tv_unluck_tips);
 
         tv_unluck_tips.setTypeface(face);
 
@@ -2080,6 +2080,7 @@ public class DeviceActivity extends Activity implements SlideBar.OnTriggerListen
     @Override  // override backpressed
     public void onBackPressed() {
         Log.d("onBackPressed", "onBackPressed");
+        MainActivity.mConnected = mConnected;
         startActivity(new Intent(DeviceActivity.this, MainActivity.class));
         overridePendingTransition(R.anim.fade, R.anim.hold);
     }
@@ -2098,7 +2099,6 @@ public class DeviceActivity extends Activity implements SlideBar.OnTriggerListen
     }
 
     public static void onFinishActivity() {
-        mConnected = false;
         if (mBluetoothLeService != null)
             mBluetoothLeService.disconnect();
         if (deviceActivity != null)

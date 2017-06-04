@@ -57,10 +57,11 @@ public class CommentPresenter extends Presenter<CommentView> {
     }
 
 
-    public void delComment(String comments_id) {
+    public void delComment(String comments_id,String post_id) {
         RequestParams params = new RequestParams();
 //        if (UserInfos.getLoginBean() != null)
         params.put("comments_id", comments_id);
+        params.put("post_id", post_id);
         if (UserInfos.getLoginBean() != null)
             params.put("user_id", UserInfos.getLoginBean().getUser_id());
         // 发送请求

@@ -52,7 +52,7 @@ public class MainActivity extends AnyTimeActivity {
      * intensive, it may be best to switch to a
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
-
+    public static boolean mConnected = false;
 
     public int current_tab;
 
@@ -80,6 +80,8 @@ public class MainActivity extends AnyTimeActivity {
 
         setContentView(R.layout.activity_main);
         EventBus.getDefault().register(this);
+
+
 //初始化SDK
         ShareSDK.initSDK(this);
         if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
@@ -338,6 +340,7 @@ public class MainActivity extends AnyTimeActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        mConnected = false;
         EventBus.getDefault().unregister(this);
     }
 
@@ -357,7 +360,7 @@ public class MainActivity extends AnyTimeActivity {
     protected void onResume() {
 
         super.onResume();
-        if (!DeviceActivity.mConnected)
+        if (!mConnected)
             device_logo.setImageResource(R.drawable.deviceselect);
         else
             device_logo.setImageResource(R.drawable.deviceselected);

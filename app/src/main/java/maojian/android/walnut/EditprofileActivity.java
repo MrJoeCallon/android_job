@@ -475,8 +475,8 @@ public class EditprofileActivity extends AnyTimeActivity implements MeView {
                 userBean.getUserinfo().setGender(usergender.getText().toString());//usergender.setText(userBean.getUserinfo().getGender());
                 userBean.getUserinfo().setSpectra_name(userskatename.getText().toString());//.setText(userBean.getUserinfo().getSpectra_name());
                 userBean.getUserinfo().setInfo(info.getText().toString());//info.setText(.getInfo());
-                userBean.getUserinfo().setHeight(Integer.parseInt(epheight.getText().toString()));//epheight.setText(userBean.getUserinfo().getHeight() + "");
-                userBean.getUserinfo().setWeight(Integer.parseInt(epweight.getText().toString()));//.setText(userBean.getUserinfo().getWeight() + "");
+                userBean.getUserinfo().setHeight(TextUtils.isEmpty(epheight.getText().toString()) ? 0 : Integer.parseInt(epheight.getText().toString()));//epheight.setText(userBean.getUserinfo().getHeight() + "");
+                userBean.getUserinfo().setWeight(TextUtils.isEmpty(epweight.getText().toString()) ? 0 :Integer.parseInt(epweight.getText().toString()));//.setText(userBean.getUserinfo().getWeight() + "");
                 userBean.getUserinfo().setIs_push(findViewById(R.id.pushsetting).isSelected() ? 1 : 0);//setSelected(.getIs_push() == 0 ? false : true);
                 editUser(userBean);
 

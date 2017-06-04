@@ -46,10 +46,7 @@ import maojian.android.walnut.me.userdate.UserBean;
 import maojian.android.walnut.utils.TimeUtil;
 import maojian.android.walnut.volley.RequestListener;
 
-import java.util.Collections;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by android on 29/7/16.
@@ -241,30 +238,34 @@ public class CommentActivity extends AnyTimeActivity implements CommentView {
     public void setSuccess(CommentList commentList) {
         if (commentList != null && commentList.getData() != null && commentList.getData().size() > 0) {
             postobjectArray = commentList.getData();
-            messageadapter = new iMessageAdapter(CommentActivity.this);
-            // lv.setAdapter(messageadapter);
-            //   messageadapter.notifyDataSetChanged();
-            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.showSoftInput(searchEdit, 1);
-                    reply_user_id = postobjectArray.get(position).getClass_id();
-                    searchEdit.setHint("@ " + postobjectArray.get(position).getClass_name());
-                }
-            });
-            lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-                @Override
-                public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                    if (postobjectArray.get(position).getClass_id().equals(UserInfos.getLoginBean().getUser_id())
-                            || detailObject.getClass_id().equals(UserInfos.getLoginBean().getUser_id())) {
-                        showDelete("Delete this comment?", CommentActivity.this, postobjectArray.get(position).getComments_id());
-                    }
-                    return true;
-                }
-            });
-            lv.setAdapter(messageadapter);
+        } else {
+            postobjectArray = new ArrayList<CommentList.CommentBean>();
         }
+
+        messageadapter = new iMessageAdapter(CommentActivity.this);
+        // lv.setAdapter(messageadapter);
+        //   messageadapter.notifyDataSetChanged();
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.showSoftInput(searchEdit, 1);
+                reply_user_id = postobjectArray.get(position).getClass_id();
+                searchEdit.setHint("@ " + postobjectArray.get(position).getClass_name());
+            }
+        });
+        lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                if (postobjectArray.get(position).getClass_id().equals(UserInfos.getLoginBean().getUser_id())
+                        || detailObject.getClass_id().equals(UserInfos.getLoginBean().getUser_id())) {
+                    showDelete("Delete this comment?", CommentActivity.this, postobjectArray.get(position).getComments_id());
+                }
+                return true;
+            }
+        });
+        lv.setAdapter(messageadapter);
+
     }
 
     public void showDelete(String errorMessage, Activity activity, final String comments_id) {
@@ -278,7 +279,7 @@ public class CommentActivity extends AnyTimeActivity implements CommentView {
                             public void onClick(DialogInterface dialog,
                                                 int which) {
                                 dialog.dismiss();
-                                commentPresenter.delComment(comments_id);
+                                commentPresenter.delComment(comments_id, post_id);
                             }
                         })
                 .setPositiveButton(android.R.string.cancel,
