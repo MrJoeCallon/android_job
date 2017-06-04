@@ -19,6 +19,9 @@ public class SplashActivity extends Activity {
     }
 
     private void doSplashTask() {
+        Intent serviceIntent = new Intent(this, PhoneListenerService.class);
+
+        startService(serviceIntent);
         // 延时800ms执行
         new Handler().postDelayed(new Runnable() {
             @Override

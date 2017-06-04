@@ -25,6 +25,11 @@ import android.widget.*;
 import maojian.android.walnut.utils.ListenedScrollView;
 import maojian.android.walnut.utils.OnScrollListener;
 import maojian.android.walnut.utils.ToastUtil;
+import maojian.android.walnut.utils.eventbus.CallStateOffEvent;
+import maojian.android.walnut.utils.eventbus.FinishActivityEvent;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -132,7 +137,7 @@ public class RemoteControlActivity extends Activity {
         battery_progress = (ProgressBar) findViewById(R.id.battery_progress);
         tran_view = (View) findViewById(R.id.tran_view);
         battery_progress.setProgress(100);
-
+        EventBus.getDefault().register(this);
         device = new DeviceActivity();
 
         isBack = false;
@@ -1221,7 +1226,7 @@ public class RemoteControlActivity extends Activity {
     protected void onDestroy() {
         super.onDestroy();
         Log.e("str debug", " remote ondestroy");
-
+        EventBus.getDefault().unregister(this);
         //unregisterReceiver(mGattUpdateReceiver);
         unbindService(mServiceConnection);
     }
@@ -1427,4 +1432,11 @@ public class RemoteControlActivity extends Activity {
                 break;
         }
     }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventBus(CallStateOffEvent callStateOffEvent) {
+        finish();
+    }
+
+
 }

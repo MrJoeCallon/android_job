@@ -56,9 +56,9 @@ android {
     }
 }
 
-repositories {
-    mavenCentral()
-}
+//repositories {
+//    mavenCentral()
+//}
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
@@ -69,13 +69,13 @@ dependencies {
         transitive = true
     }
 
-    compile ('com.mapbox.mapboxsdk:mapbox-android-geocoder:1.0.0@aar'){
-        transitive=true
-    }
-
-    compile ('com.mapbox.mapboxsdk:mapbox-android-geocoder:1.0.0@aar'){
-        transitive=true
-    }
+//    compile ('com.mapbox.mapboxsdk:mapbox-android-geocoder:1.0.0@aar'){
+//        transitive=true
+//    }
+//
+//    compile ('com.mapbox.mapboxsdk:mapbox-android-geocoder:1.0.0@aar'){
+//        transitive=true
+//    }
 
 //    compile('com.mapbox.mapboxsdk:mapbox-android-sdk:5.0.2@aar') {
 //        transitive = true

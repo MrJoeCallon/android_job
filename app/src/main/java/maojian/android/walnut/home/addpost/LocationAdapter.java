@@ -21,10 +21,10 @@ import java.util.List;
  */
 public class LocationAdapter extends BaseAdapter {
     private Context mcontext;
-    private List<LocationBean.result.pois> pois;
+    private List<LocationBean.results> pois;
     private int number;
 
-    public LocationAdapter(Context context, List<LocationBean.result.pois> pois) {
+    public LocationAdapter(Context context, List<LocationBean.results> pois) {
         mcontext = context;
         this.pois = pois;
         if (pois == null) {
@@ -64,12 +64,12 @@ public class LocationAdapter extends BaseAdapter {
         } else {
             viewholder = (viewHolder) view.getTag();
         }
-        LocationBean.result.pois poisBean = pois.get(i);
+        LocationBean.results poisBean = pois.get(i);
 //        if (mMessage.get(i).getDoctorName() != null) {
         viewholder.doctorname.setText(poisBean.getName());
 //        }
 //        if (mMessage.get(i).getHospitalName() != null) {
-        viewholder.title.setText(poisBean.getAddr());
+        viewholder.title.setText(poisBean.getVicinity());
 //        }
 //        if (mMessage.get(i).getDeptName() != null) {
 //            viewholder.doctorkemu.setText(mMessage.get(i).getDeptName());
@@ -90,9 +90,9 @@ public class LocationAdapter extends BaseAdapter {
     }
 
     class lvButtonListener implements View.OnClickListener {
-        LocationBean.result.pois poisBean;
+        LocationBean.results poisBean;
 
-        lvButtonListener(LocationBean.result.pois poisBean1) {
+        lvButtonListener(LocationBean.results poisBean1) {
             poisBean = poisBean1;
         }
 

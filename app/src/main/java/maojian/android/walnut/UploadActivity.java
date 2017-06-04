@@ -41,6 +41,8 @@ import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 import maojian.android.walnut.home.addpost.*;
 import maojian.android.walnut.utils.BitmapUtils;
+import maojian.android.walnut.utils.JsonUtils;
+import maojian.android.walnut.utils.ToastUtil;
 import maojian.android.walnut.utils.eventbus.AddLocationEvent;
 import maojian.android.walnut.utils.eventbus.FinishActivityEvent;
 import maojian.android.walnut.utils.eventbus.PostBean;
@@ -473,11 +475,15 @@ public class UploadActivity extends AnyTimeActivity implements AddPostView {
                     Toast.makeText(UploadActivity.this, "获取经纬度失败，请稍后再试", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                addPostPresenter.addLocation(new RequestBeanListener<LocationBean>() {
+                addPostPresenter.addLocation("", new RequestListener() {
                     @Override
-                    public void requestSuccess(LocationBean locationBean) {
-                        startActivity(new Intent(UploadActivity.this, AddLocationActivity.class)
-                                .putExtra("locationBean", locationBean));
+                    public void requestSuccess(String locationString) {
+                        LocationBean locationBean = JsonUtils.object(locationString, LocationBean.class);
+                        if (locationBean.getStatus().equals("OK"))
+                            startActivity(new Intent(UploadActivity.this, AddLocationActivity.class)
+                                    .putExtra("locationBean", locationBean));
+                        else
+                            ToastUtil.show(UploadActivity.this,"Get Location error");
                     }
 
                     @Override

@@ -15,6 +15,10 @@ import android.os.IBinder;
 import android.util.Log;
 import android.view.*;
 import android.widget.*;
+import maojian.android.walnut.utils.eventbus.CallStateOffEvent;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -110,7 +114,7 @@ public class RemoteControlActivity1 extends Activity {
         battery_progress = (ProgressBar) findViewById(R.id.battery_progress);
         tv_speed = (TextView) findViewById(R.id.tv_speed);
         battery_progress.setProgress(100);
-
+        EventBus.getDefault().register(this);
         device = new DeviceActivity();
 
         isBack = false;
@@ -1097,7 +1101,7 @@ public class RemoteControlActivity1 extends Activity {
     protected void onDestroy() {
         super.onDestroy();
         Log.e("str debug", " remote ondestroy");
-
+        EventBus.getDefault().unregister(this);
         //unregisterReceiver(mGattUpdateReceiver);
         unbindService(mServiceConnection);
     }
@@ -1255,6 +1259,9 @@ public class RemoteControlActivity1 extends Activity {
         Log.e("remote", "sendbackData123");
         finish();
     }
-
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventBus(CallStateOffEvent callStateOffEvent) {
+        finish();
+    }
 
 }

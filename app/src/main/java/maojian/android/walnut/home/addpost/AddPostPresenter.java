@@ -117,14 +117,19 @@ public class AddPostPresenter extends Presenter<AddPostView> {
     /**
      */
 
-    public void addLocation(RequestBeanListener requestListener) {
-        RequestParams params = new RequestParams();
-        params.put("lng", BaseConstant.longitude + "");
-        params.put("lat", BaseConstant.latitude + "");
-//        params.put("lng", "-102.254.674");
-//        params.put("lat", "50.563313");
+    public void addLocation(String keyword, RequestListener requestListener) {
+//        RequestParams params = new RequestParams();
+////        params.put("lng", BaseConstant.longitude + "");
+////        params.put("lat", BaseConstant.latitude + "");
+//        params.put("location", BaseConstant.longitude + "," + BaseConstant.latitude);
+//        params.put("radius", "500");
+//        params.put("type", "restaurant");
+//        params.put("keyword", keyword);
+//        params.put("key", "AIzaSyAx3fxifl2kaAs8LAp4xvd7YcQndTitsF0");
+        String url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&radius=500&type=restaurant&keyword=cruise&key=AIzaSyAx3fxifl2kaAs8LAp4xvd7YcQndTitsF0";
+
         // 发送请求
-        mVolleyRequest.post(context, BaseConstant.getLocationList, LocationBean.class, params,
+        mVolleyRequest.get(context, url,
                 context.getResources().getString(R.string.login_tips), requestListener);
     }
 

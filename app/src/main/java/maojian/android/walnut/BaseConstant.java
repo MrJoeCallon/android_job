@@ -40,7 +40,8 @@ public class BaseConstant {
     public static String deleteComment = baseServiceUrl + "index/deleteComment";
     public static String postImgUpload = baseServiceUrl + "user/postImgUpload";
     public static String uoloadUserHeadImg = baseServiceUrl + "user/uoloadUserHeadImg";
-    public static String getLocationList = baseServiceUrl + "index/getLocationList";
+//    public static String getLocationList = baseServiceUrl + "index/getLocationList";
+    public static String getLocationList ="https://maps.googleapis.com/maps/api/place/nearbysearch/json";
     public static String addPost = baseServiceUrl + "index/addPost";
     public static String commentPost = baseServiceUrl + "index/commentPost";
     public static String releasePost = baseServiceUrl + "user/releasePost";

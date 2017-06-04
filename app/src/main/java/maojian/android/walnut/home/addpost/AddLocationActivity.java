@@ -18,7 +18,7 @@ public class AddLocationActivity extends AnyTimeActivity {
         setTitle("选择地址");
         locationBean = (LocationBean) getIntent().getSerializableExtra("locationBean");
         listView = (ListView) findViewById(R.id.listview);
-        locationAdapter = new LocationAdapter(this, locationBean.getResult().getPois());
+        locationAdapter = new LocationAdapter(this, locationBean.getResults());
         listView.setAdapter(locationAdapter);
     }
 

@@ -10,68 +10,34 @@ import java.util.List;
  * @version: 1.0
  */
 public class LocationBean implements Serializable {
-    private result result;
+    private List<results> results;
+    private String status;
 
-    public LocationBean.result getResult() {
-        return result;
+    public String getStatus() {
+        return status;
     }
 
-    public void setResult(LocationBean.result result) {
-        this.result = result;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public class result implements Serializable {
-    private location location;
-    private List<pois> pois;
-
-        public List<LocationBean.result.pois> getPois() {
-            return pois;
-        }
-
-        public void setPois(List<LocationBean.result.pois> pois) {
-            this.pois = pois;
-        }
-
-        public LocationBean.result.location getLocation() {
-        return location;
+    public List<LocationBean.results> getResults() {
+        return results;
     }
 
-    public void setLocation(LocationBean.result.location location) {
-        this.location = location;
+    public void setResults(List<LocationBean.results> results) {
+        this.results = results;
     }
 
+    public class results implements Serializable {
+        private geometry geometry;
 
-    public class location implements Serializable {
-        private double lng;
-        private double lat;
-
-        public double getLng() {
-            return lng;
+        public LocationBean.results.geometry getGeometry() {
+            return geometry;
         }
 
-        public void setLng(double lng) {
-            this.lng = lng;
-        }
-
-        public double getLat() {
-            return lat;
-        }
-
-        public void setLat(double lat) {
-            this.lat = lat;
-        }
-    }
-
-    public class pois implements Serializable {
-        private String addr;
-        private String name;
-
-        public String getAddr() {
-            return addr;
-        }
-
-        public void setAddr(String addr) {
-            this.addr = addr;
+        public void setGeometry(LocationBean.results.geometry geometry) {
+            this.geometry = geometry;
         }
 
         public String getName() {
@@ -82,36 +48,50 @@ public class LocationBean implements Serializable {
             this.name = name;
         }
 
-        public LocationBean.result.pois.point getPoint() {
-            return point;
+        private String name;
+        private String vicinity;
+
+        public String getVicinity() {
+            return vicinity;
         }
 
-        public void setPoint(LocationBean.result.pois.point point) {
-            this.point = point;
+        public void setVicinity(String vicinity) {
+            this.vicinity = vicinity;
         }
 
-        private point point;
+        public class geometry implements Serializable {
+            private location location;
 
-        public class point implements Serializable {
-            private double x;
-            private double y;
-
-            public double getX() {
-                return x;
+            public LocationBean.results.geometry.location getLocation() {
+                return location;
             }
 
-            public void setX(double x) {
-                this.x = x;
+            public void setLocation(LocationBean.results.geometry.location location) {
+                this.location = location;
             }
 
-            public double getY() {
-                return y;
-            }
+            public class location implements Serializable {
+                private double lng;
+                private double lat;
 
-            public void setY(double y) {
-                this.y = y;
+                public double getLng() {
+                    return lng;
+                }
+
+                public void setLng(double lng) {
+                    this.lng = lng;
+                }
+
+                public double getLat() {
+                    return lat;
+                }
+
+                public void setLat(double lat) {
+                    this.lat = lat;
+                }
             }
         }
-    }
+
+
     }
 }
