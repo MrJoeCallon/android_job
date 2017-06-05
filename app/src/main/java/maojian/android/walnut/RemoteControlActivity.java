@@ -19,6 +19,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.provider.ContactsContract;
+import android.telephony.PhoneStateListener;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.*;
 import android.widget.*;
@@ -123,6 +125,7 @@ public class RemoteControlActivity extends Activity {
 
     View tran_view;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -139,7 +142,7 @@ public class RemoteControlActivity extends Activity {
         battery_progress.setProgress(100);
         EventBus.getDefault().register(this);
         device = new DeviceActivity();
-
+        createPhoneListener();
         isBack = false;
 
         exam_label = (TextView) findViewById(R.id.exam_value);
@@ -1438,5 +1441,38 @@ public class RemoteControlActivity extends Activity {
         finish();
     }
 
-
+    /**
+     * 按钮-监听电话
+     */
+    public void createPhoneListener() {
+        TelephonyManager telephony = (TelephonyManager)getSystemService(
+                Context.TELEPHONY_SERVICE);
+        telephony.listen(new OnePhoneStateListener(),
+                PhoneStateListener.LISTEN_CALL_STATE);
+    }
+    public final static String TAG = "MyBroadcastReceiver";
+    /**
+     * 电话状态监听.
+     * @author stephen
+     *
+     */
+    class OnePhoneStateListener extends PhoneStateListener{
+        @Override
+        public void onCallStateChanged(int state, String incomingNumber) {
+            Log.i(TAG, "[Listener]电话号码:"+incomingNumber);
+            switch(state){
+                case TelephonyManager.CALL_STATE_RINGING:
+                    Log.i(TAG, "[Listener]等待接电话:"+incomingNumber);
+                    finish();
+                    break;
+                case TelephonyManager.CALL_STATE_IDLE:
+                    Log.i(TAG, "[Listener]电话挂断:"+incomingNumber);
+                    break;
+                case TelephonyManager.CALL_STATE_OFFHOOK:
+                    Log.i(TAG, "[Listener]通话中:"+incomingNumber);
+                    break;
+            }
+            super.onCallStateChanged(state, incomingNumber);
+        }
+    }
 }

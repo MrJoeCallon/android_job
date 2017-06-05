@@ -23,8 +23,10 @@ public class LocationAdapter extends BaseAdapter {
     private Context mcontext;
     private List<LocationBean.results> pois;
     private int number;
+    private String location;
 
-    public LocationAdapter(Context context, List<LocationBean.results> pois) {
+    public LocationAdapter(Context context, List<LocationBean.results> pois, String location1) {
+        this.location = location1;
         mcontext = context;
         this.pois = pois;
         if (pois == null) {
@@ -67,9 +69,20 @@ public class LocationAdapter extends BaseAdapter {
         LocationBean.results poisBean = pois.get(i);
 //        if (mMessage.get(i).getDoctorName() != null) {
         viewholder.doctorname.setText(poisBean.getName());
+        if ((location.equals("") && i == 0) || location.equals(poisBean.getName())) {
+            viewholder.iv_check.setImageResource(R.drawable.camera_shutter);
+        } else {
+            viewholder.iv_check.setImageResource(R.drawable.ssdk_oks_classic_check_default);
+        }
 //        }
 //        if (mMessage.get(i).getHospitalName() != null) {
-        viewholder.title.setText(poisBean.getVicinity());
+        if (i == 0) {
+            viewholder.title.setVisibility(View.GONE);
+        } else {
+            viewholder.title.setVisibility(View.VISIBLE);
+            viewholder.title.setText(poisBean.getVicinity());
+        }
+
 //        }
 //        if (mMessage.get(i).getDeptName() != null) {
 //            viewholder.doctorkemu.setText(mMessage.get(i).getDeptName());
@@ -77,7 +90,7 @@ public class LocationAdapter extends BaseAdapter {
 //        if (mMessage.get(i).getDoctorTitle() != null) {
 //            viewholder.doctorwork.setText(mMessage.get(i).getDoctorTitle());
 //        }
-        viewholder.iv_check.setOnClickListener(new lvButtonListener(poisBean));
+//        viewholder.iv_check.setOnClickListener(new lvButtonListener(poisBean));
 
         return view;
     }

@@ -25,6 +25,15 @@ public class LocationBean implements Serializable {
         return results;
     }
 
+    public List<LocationBean.results> getResultsList() {
+        LocationBean.results results1 = new results();
+        results1.setName("Don't show the location");
+        results1.setVicinity("");
+        if (results != null)
+            results.add(0, results1);
+        return results;
+    }
+
     public void setResults(List<LocationBean.results> results) {
         this.results = results;
     }

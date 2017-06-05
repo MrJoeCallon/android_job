@@ -125,8 +125,9 @@ public class AddPostPresenter extends Presenter<AddPostView> {
 //        params.put("radius", "500");
 //        params.put("type", "restaurant");
 //        params.put("keyword", keyword);
-//        params.put("key", "AIzaSyAx3fxifl2kaAs8LAp4xvd7YcQndTitsF0");
-        String url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&radius=500&type=restaurant&keyword=cruise&key=AIzaSyAx3fxifl2kaAs8LAp4xvd7YcQndTitsF0";
+//        params.put("key", "AIzaSyAx3fxifl2kaAs8LAp4xvd7YcQndTitsF0");   &type=restaurant
+        String url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + BaseConstant.latitude
+                + "," + BaseConstant.longitude + "&radius=1500&keyword=" + keyword + "&key=AIzaSyAx3fxifl2kaAs8LAp4xvd7YcQndTitsF0";
 
         // 发送请求
         mVolleyRequest.get(context, url,

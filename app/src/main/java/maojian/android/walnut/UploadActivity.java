@@ -87,7 +87,7 @@ public class UploadActivity extends AnyTimeActivity implements AddPostView {
     CallbackManager callbackManager;
     ShareDialog shareDialog;
     TextView addlocation_button;
-    private String location;
+    private String location = "";
     private Handler handler = new Handler();
     private boolean faceBookShare = false, weChat = false, WeiBo = false, Twitter = false;
 
@@ -463,8 +463,14 @@ public class UploadActivity extends AnyTimeActivity implements AddPostView {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventBus(AddLocationEvent addLocationEvent) {
-        location = addLocationEvent.getTitle();
-        addlocation_button.setText(location);
+        if (addLocationEvent.getTitle().equals("Don't show the location")){
+            location = "";
+            addlocation_button.setText("Add Location");
+        } else {
+            location = addLocationEvent.getTitle();
+            addlocation_button.setText(location);
+        }
+
     }
 
     @Override
@@ -472,7 +478,7 @@ public class UploadActivity extends AnyTimeActivity implements AddPostView {
         switch (v.getId()) {
             case R.id.addlocation_button:
                 if (BaseConstant.longitude == 0 || BaseConstant.latitude == 0) {
-                    Toast.makeText(UploadActivity.this, "获取经纬度失败，请稍后再试", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UploadActivity.this, "Please open GPS", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 addPostPresenter.addLocation("", new RequestListener() {
@@ -481,7 +487,7 @@ public class UploadActivity extends AnyTimeActivity implements AddPostView {
                         LocationBean locationBean = JsonUtils.object(locationString, LocationBean.class);
                         if (locationBean.getStatus().equals("OK"))
                             startActivity(new Intent(UploadActivity.this, AddLocationActivity.class)
-                                    .putExtra("locationBean", locationBean));
+                                    .putExtra("locationBean", locationBean).putExtra("location",location));
                         else
                             ToastUtil.show(UploadActivity.this,"Get Location error");
                     }
