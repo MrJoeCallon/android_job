@@ -49,13 +49,17 @@ import com.mapbox.mapboxsdk.annotations.Icon;
 import com.mapbox.mapboxsdk.annotations.IconFactory;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.annotations.MarkerViewOptions;
+import com.mapbox.mapboxsdk.camera.CameraPosition;
+import com.mapbox.mapboxsdk.camera.CameraUpdate;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.constants.MyLocationTracking;
+import com.mapbox.mapboxsdk.constants.Style;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.location.LocationListener;
 import com.mapbox.mapboxsdk.location.LocationServices;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
+import com.mapbox.mapboxsdk.maps.MapboxMapOptions;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -440,12 +444,38 @@ public class Me extends Fragment implements MeView, OnMarkerClickListener,
         init();
 
         //地图
+        MapboxMapOptions options = new MapboxMapOptions()
+                .styleUrl(Style.OUTDOORS)
+                .camera(new CameraPosition.Builder()
+                        .target(new LatLng(43.7383, 7.4094))
+                        .zoom(12)
+                        .build());
+
+
         map = (MapView) view2.findViewById(R.id.mapView);
         map.onCreate(savedInstanceState);
         map.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(MapboxMap mapboxMap1) {
                 mapboxMap = mapboxMap1;
+                LatLng location = new LatLng();
+                location.setLatitude(BaseConstant.latitude);
+                location.setLongitude(BaseConstant.longitude);
+                mapboxMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location), 12));
+
+//
+//                mapboxMap.moveCamera(new CameraUpdate() {
+//                    @Override
+//                    public CameraPosition getCameraPosition(@NonNull MapboxMap mapboxMap) {
+//                        mapboxMap.
+//                        return null;
+//                    }
+//                });CameraUpdate
+//               CameraPosition cameraPosition = mapboxMap.getCameraPosition();
+//                cameraPosition.zoom
+//                new CameraPosition(latLng,10,0,0);
+//                .
+//               mapboxMap.setCameraPosition(cameraPosition);
 //                IconFactory iconFactory = IconFactory.getInstance(getActivity());
 //                Drawable iconDrawable = ContextCompat.getDrawable(getActivity(), R.drawable.deviceselected);
 //                Icon icon = iconFactory.fromDrawable(iconDrawable);

@@ -13,8 +13,8 @@ public class BaseConstant {
     public static String shopify = "https://checkout.shopify.com/15873557/policies/36608836.html";
     public static String store = "https://store.walnuttech.co/";
 
-    public static double longitude = 0;
-    public static double latitude = 0;
+    public static double longitude = 23.124664;
+    public static double latitude =  113.3223;
     public static int km = 0;
 
     public static String baseServiceUrl = "https://apprest.walnuttech.co/index.php/mobile/";

@@ -82,6 +82,7 @@
 
 
     <string name="slide_to_unlock_string">Slide to Unlock</string>
+    <string name="slide_to_lock_string">Slide to Lock</string>
     <string name="null_string"></string>
     <string name="slide_description">slide icon</string>
     <string name="unlock_string">unlock!!</string>

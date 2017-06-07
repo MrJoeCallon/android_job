@@ -192,7 +192,7 @@ public class EditprofileActivity extends AnyTimeActivity implements MeView {
         findViewById(R.id.privacy).setOnClickListener(this);
         findViewById(R.id.linkedaccount).setOnClickListener(this);
         avatar.setOnClickListener(this);
-//        BaseConstant.km = 6;
+        BaseConstant.km = 6;
     }
 
     private void setHasFocus() {
