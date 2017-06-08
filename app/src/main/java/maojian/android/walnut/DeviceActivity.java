@@ -407,7 +407,7 @@ public class DeviceActivity extends Activity implements SlideBar.OnTriggerListen
 //                                lock_signal = true;
 //                                Log.e("password setup", "lock signal true");
 //                            }
-
+                            lock_view.setVisibility(View.VISIBLE);
                             // 收到返回值改变状态更好
                             if (lockmode) {
 
@@ -422,19 +422,19 @@ public class DeviceActivity extends Activity implements SlideBar.OnTriggerListen
 //                                device_bottomlayout.setVisibility(View.VISIBLE);
 //                                rounding_text.setText("Tap the SPECTRA to unlock");
                                 tv_unluck_tips.setText(getResources().getString(R.string.slide_to_unlock_string));
-                                luckdevice_bottomlayout.setVisibility(View.VISIBLE);
-                                device_bottomlayout.setVisibility(View.GONE);
+//                                luckdevice_bottomlayout.setVisibility(View.VISIBLE);
+//                                device_bottomlayout.setVisibility(View.GONE);
 
                             } else {
-//                                lock_view.setVisibility(View.VISIBLE);
+
 //                                lockstatus.setBackground(getResources().getDrawable(R.drawable.lockstatus));
 //                                device_product.setBackground(getResources().getDrawable(R.drawable.device_product_lock));
 //                                lock_signal = true;
 //                                lockmode = true;
 //                                rounding_text.setText("Tap the SPECTRA to unlock");
                                 tv_unluck_tips.setText(getResources().getString(R.string.slide_to_lock_string));
-                                luckdevice_bottomlayout.setVisibility(View.VISIBLE);
-                                device_bottomlayout.setVisibility(View.GONE);
+//                                luckdevice_bottomlayout.setVisibility(View.VISIBLE);
+//                                device_bottomlayout.setVisibility(View.GONE);
                             }
 
                         }
@@ -2000,7 +2000,7 @@ public class DeviceActivity extends Activity implements SlideBar.OnTriggerListen
         device_bottomlayout.setVisibility(View.INVISIBLE);
 
         lockstatus.setVisibility(View.GONE);
-
+        luckdevice_bottomlayout.setVisibility(View.GONE);
         diconnnected_layout.setVisibility(View.VISIBLE);
 
         Log.e("strange", "setdisConnected_Layout!!");
@@ -2120,18 +2120,18 @@ public class DeviceActivity extends Activity implements SlideBar.OnTriggerListen
             lock_signal = true;
             lockmode = false;
             rounding_text.setText("Tap the SPECTRA for self-test");
-
             luckdevice_bottomlayout.setVisibility(View.GONE);
             device_bottomlayout.setVisibility(View.VISIBLE);
-
         } else {
-            lock_view.setVisibility(View.VISIBLE);
+            lock_view.setVisibility(View.GONE);
+            slideToUnLock.mGradientView.resetControl();
             lockstatus.setBackground(getResources().getDrawable(R.drawable.lockstatus));
             device_product.setBackground(getResources().getDrawable(R.drawable.device_product_lock));
             lock_signal = true;
             lockmode = true;
             rounding_text.setText("Tap the SPECTRA to unlock");
-
+            luckdevice_bottomlayout.setVisibility(View.VISIBLE);
+            device_bottomlayout.setVisibility(View.GONE);
         }
 
     }

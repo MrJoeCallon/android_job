@@ -436,7 +436,7 @@ public class Me extends Fragment implements MeView, OnMarkerClickListener,
             public void run() {
                 horizontalScrollView.fullScroll(HorizontalScrollView.FOCUS_RIGHT);
             }
-        }, 200L);
+        }, 500L);
 
         mapView.onCreate(savedInstanceState);
 
@@ -444,13 +444,6 @@ public class Me extends Fragment implements MeView, OnMarkerClickListener,
         init();
 
         //地图
-        MapboxMapOptions options = new MapboxMapOptions()
-                .styleUrl(Style.OUTDOORS)
-                .camera(new CameraPosition.Builder()
-                        .target(new LatLng(43.7383, 7.4094))
-                        .zoom(12)
-                        .build());
-
 
         map = (MapView) view2.findViewById(R.id.mapView);
         map.onCreate(savedInstanceState);
@@ -539,7 +532,7 @@ public class Me extends Fragment implements MeView, OnMarkerClickListener,
                     String infoDay = userBean.getInfo().get(j).getTime().substring(userBean.getInfo().get(j).getTime().length() - 2,
                             userBean.getInfo().get(j).getTime().length());
                     Log.d("infoDay=", infoDay + " dateString=" + dateString);
-                    if (dateString.endsWith(infoDay)) {
+                    if (dateString.equals(infoDay) || infoDay.equals("0" + dateString)) {
                         value = userBean.getInfo().get(j).getToday_usage();
                         break;
                     }
@@ -703,13 +696,13 @@ public class Me extends Fragment implements MeView, OnMarkerClickListener,
                         public void onLoadingComplete(String s, View view, Bitmap bitmap) {
                             if (bitmap == null)
                                 bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.location_marker);
-                            bitmap =  zoomImg(bitmap, 80, 80);
+                            bitmap = zoomImg(bitmap, 80, 80);
                             IconFactory iconFactory = IconFactory.getInstance(getActivity());
                             Icon icon = iconFactory.fromBitmap(bitmap);
                             if (mapboxMap != null)
                                 mapboxMap.addMarker(new MarkerViewOptions()
                                         .icon(icon)
-                                        .position(new LatLng(Double.parseDouble(postBean.getLat()),Double.parseDouble(postBean.getLng()))));
+                                        .position(new LatLng(Double.parseDouble(postBean.getLat()), Double.parseDouble(postBean.getLng()))));
 
                             drawMarkers(bitmap,
                                     new com.amap.api.maps.model.LatLng(Double.parseDouble(postBean.getLat()), Double.parseDouble(postBean.getLng())));
@@ -1816,24 +1809,25 @@ public class Me extends Fragment implements MeView, OnMarkerClickListener,
 
     private void enableLocation() {
         // If we have the last location of the user, we can move the camera to that position.
-//        Location lastLocation = locationServices.getLastLocation();
-//        if (lastLocation != null) {
-//            map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lastLocation), 12));
-//        }
+        Location lastLocation = locationServices.getLastLocation();
+        if (lastLocation != null && mapboxMap != null) {
+            mapboxMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lastLocation), 12));
+        }
 //
-//        locationServices.addLocationListener(new LocationListener() {
-//            @Override
-//            public void onLocationChanged(Location location) {
-//                if (location != null) {
-//                    // Move the map camera to where the user location is and then remove the
-//                    // listener so the camera isn't constantly updating when the user location
-//                    // changes. When the user disables and then enables the location again, this
-//                    // listener is registered again and will adjust the camera once again.
-//                    map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location), 12));
-//                    locationServices.removeLocationListener(this);
-//                }
-//            }
-//        });
+        locationServices.addLocationListener(new LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+                if (location != null) {
+                    // Move the map camera to where the user location is and then remove the
+                    // listener so the camera isn't constantly updating when the user location
+                    // changes. When the user disables and then enables the location again, this
+                    // listener is registered again and will adjust the camera once again.
+                    if (mapboxMap != null)
+                        mapboxMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location), 12));
+                    locationServices.removeLocationListener(this);
+                }
+            }
+        });
 //        // Enable or disable the location layer on the map
 //        Log.e("map debug", "setMyLocationEnabled");
 //        map.setMyLocationEnabled(true);

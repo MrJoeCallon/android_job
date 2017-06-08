@@ -881,8 +881,8 @@ public class RemoteControlActivity1 extends Activity {
                 }
             }
 
-            if (isRide)
-                riding_remote.setVisibility(View.VISIBLE);
+//            if (isRide)
+//                riding_remote.setVisibility(View.VISIBLE);
 //                else
 //                    riding_remote.setVisibility(View.GONE);
 
@@ -1193,13 +1193,13 @@ public class RemoteControlActivity1 extends Activity {
         switch (keyCode) {
             // 音量减小
             case KeyEvent.KEYCODE_VOLUME_DOWN:
-                Toast.makeText(RemoteControlActivity1.this, "当前音量减小：", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(RemoteControlActivity1.this, "当前音量减小：", Toast.LENGTH_SHORT).show();
                 // 音量减小时应该执行的功能代码
                 return true;
 
             // 音量增大
             case KeyEvent.KEYCODE_VOLUME_UP:
-                Toast.makeText(RemoteControlActivity1.this, "当前音量值", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(RemoteControlActivity1.this, "当前音量值", Toast.LENGTH_SHORT).show();
                 // 音量增大时应该执行的功能代码
                 return true;
         }
