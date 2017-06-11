@@ -118,19 +118,21 @@ public class AddPostPresenter extends Presenter<AddPostView> {
      */
 
     public void addLocation(String keyword, RequestListener requestListener) {
-//        RequestParams params = new RequestParams();
-////        params.put("lng", BaseConstant.longitude + "");
-////        params.put("lat", BaseConstant.latitude + "");
-//        params.put("location", BaseConstant.longitude + "," + BaseConstant.latitude);
-//        params.put("radius", "500");
-//        params.put("type", "restaurant");
-//        params.put("keyword", keyword);
-//        params.put("key", "AIzaSyAx3fxifl2kaAs8LAp4xvd7YcQndTitsF0");   &type=restaurant
-        String url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + BaseConstant.latitude
-                + "," + BaseConstant.longitude + "&radius=1500&keyword=" + keyword + "&key=AIzaSyAx3fxifl2kaAs8LAp4xvd7YcQndTitsF0";
-
-        // 发送请求
-        mVolleyRequest.get(context, url,
+        RequestParams params = new RequestParams();
+//        params.put("lng", BaseConstant.longitude + "");
+//        params.put("lat", BaseConstant.latitude + "");
+        params.put("location", BaseConstant.latitude + "," + BaseConstant.longitude);
+        params.put("radius", "1500");
+        params.put("keyword", keyword);
+        params.put("key", "AIzaSyAx3fxifl2kaAs8LAp4xvd7YcQndTitsF0");  // &type=restaurant
+//        String url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + BaseConstant.latitude
+//                + "," + BaseConstant.longitude + "&radius=1500&keyword=" + keyword + "&key=AIzaSyAx3fxifl2kaAs8LAp4xvd7YcQndTitsF0";
+//
+//
+//         发送请求
+//        mVolleyRequest.get(context, url,
+//                context.getResources().getString(R.string.login_tips), requestListener);
+        mVolleyRequest.post(context, "https://maps.googleapis.com/maps/api/place/nearbysearch/json", params,
                 context.getResources().getString(R.string.login_tips), requestListener);
     }
 

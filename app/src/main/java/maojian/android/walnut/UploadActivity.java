@@ -463,7 +463,7 @@ public class UploadActivity extends AnyTimeActivity implements AddPostView {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventBus(AddLocationEvent addLocationEvent) {
-        if (addLocationEvent.getTitle().equals("Don't show the location")){
+        if (addLocationEvent.getTitle().equals("Don't show the location")) {
             location = "";
             addlocation_button.setText("Add Location");
         } else {
@@ -484,12 +484,14 @@ public class UploadActivity extends AnyTimeActivity implements AddPostView {
                 addPostPresenter.addLocation("", new RequestListener() {
                     @Override
                     public void requestSuccess(String locationString) {
+                        if (!TextUtils.isEmpty(locationString))
+                            Log.d("locationString=", locationString);
                         LocationBean locationBean = JsonUtils.object(locationString, LocationBean.class);
                         if (locationBean.getStatus().equals("OK"))
                             startActivity(new Intent(UploadActivity.this, AddLocationActivity.class)
-                                    .putExtra("locationBean", locationBean).putExtra("location",location));
+                                    .putExtra("locationBean", locationBean).putExtra("location", location));
                         else
-                            ToastUtil.show(UploadActivity.this,"Get Location error");
+                            ToastUtil.show(UploadActivity.this, "Get Location error");
                     }
 
                     @Override
