@@ -274,6 +274,11 @@ public class DeviceActivity extends Activity implements SlideBar.OnTriggerListen
         Typeface face1 = Typeface.createFromAsset(DeviceActivity.this.getAssets(), "fonts/Brown-Light.otf");
         rounding_text.setTypeface(face1);
 
+        if (UserInfos.getUserBean() != null &&
+                !TextUtils.isEmpty(UserInfos.getUserBean().getUserinfo().getSpectra_name()))
+            rounding_text.setText(UserInfos.getUserBean().getUserinfo().getSpectra_name() + "'s SPECTRA Pro");
+        else
+            rounding_text.setText("SPECTRA Pro");
 
         device_connectbutton = (ImageButton) findViewById(R.id.device_connectbutton);
         device_connectbutton.setOnClickListener(
@@ -2119,7 +2124,11 @@ public class DeviceActivity extends Activity implements SlideBar.OnTriggerListen
             device_product.setBackground(getResources().getDrawable(R.drawable.device_product));
             lock_signal = true;
             lockmode = false;
-            rounding_text.setText("Tap the SPECTRA for self-test");
+            if (UserInfos.getUserBean() != null &&
+                    !TextUtils.isEmpty(UserInfos.getUserBean().getUserinfo().getSpectra_name()))
+                rounding_text.setText(UserInfos.getUserBean().getUserinfo().getSpectra_name() + "'s SPECTRA Pro");
+            else
+                rounding_text.setText("SPECTRA Pro");
             luckdevice_bottomlayout.setVisibility(View.GONE);
             device_bottomlayout.setVisibility(View.VISIBLE);
         } else {

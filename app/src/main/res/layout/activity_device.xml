@@ -70,7 +70,7 @@
                 android:layout_width="230dp"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Tap the SPECTRA for self-test"
+                android:text="SPECTRA Pro"
                 android:ellipsize="marquee"
                 android:marqueeRepeatLimit="marquee_forever"
                 android:singleLine="true"
