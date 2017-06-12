@@ -471,8 +471,8 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="28dip"
                 android:background="@drawable/slide_to_unlock_bg"
-                prvandroid:MinVelocityXToUnlock="1500"
-                prvandroid:MinDistanceToUnlock="240"
+                prvandroid:MinVelocityXToUnlock="2100"
+                prvandroid:MinDistanceToUnlock="320"
                 prvandroid:LeftAnimationDuratioin="200"
                 prvandroid:RightAnimationDuratioin="300">
             <maojian.android.walnut.utils.GradientView

@@ -452,7 +452,7 @@ public class RemoteControlActivity1 extends Activity {
 
 
                 try {
-                    Thread.sleep(50);
+                    Thread.sleep(25);
                     remote_ride_radius = remote_ride_radius + 2.0;
 
                     if (remote_ride_radius >= 24.0) {
@@ -509,7 +509,7 @@ public class RemoteControlActivity1 extends Activity {
 
             while (forward_longClick) {
                 try {
-                    Thread.sleep(50);
+                    Thread.sleep(25);
                     forward_progress++;
 
 
@@ -553,7 +553,7 @@ public class RemoteControlActivity1 extends Activity {
 
             while (!forward_longClick) {
                 try {
-                    Thread.sleep(50);
+                    Thread.sleep(25);
                     if (forward_progress <= 2) {
                         forward_progress = 0;
                         rightprogressbar.setProgress(forward_progress);
@@ -605,7 +605,7 @@ public class RemoteControlActivity1 extends Activity {
             //Log.e("remotedebug", "rotation " + rotation_angle);
             while (back_longClick) {
                 try {
-                    Thread.sleep(50);
+                    Thread.sleep(25);
                     backward_progress++;
                     leftprogressbar.setProgress(backward_progress);
                     if (backward_progress >= 100) {
@@ -640,7 +640,7 @@ public class RemoteControlActivity1 extends Activity {
             }
             while (!back_longClick) {
                 try {
-                    Thread.sleep(50);
+                    Thread.sleep(25);
                     if (backward_progress <= 2) {
                         backward_progress = 0;
                         leftprogressbar.setProgress(backward_progress);
