@@ -953,7 +953,7 @@ public class RemoteControlActivity extends Activity {
     private void displayData(String data) {
 
         if (data != null) {
-            ToastUtil.show(RemoteControlActivity.this, data);
+//            ToastUtil.show(RemoteControlActivity.this, data);
             String real_data = data.substring(data.indexOf("22"), data.length() - 1);
 
             //Log.e("what data", " remote! "+real_data);
