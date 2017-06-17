@@ -60,7 +60,7 @@ public class RemoteControlActivity1 extends Activity {
 
     private double remote_ride_radius = 5;
     private boolean remote_ride_forward_flag;
-
+    private int speedValue = 0;
 
     private int v_left;
 
@@ -452,7 +452,7 @@ public class RemoteControlActivity1 extends Activity {
 
 
                 try {
-                    Thread.sleep(50);
+                    Thread.sleep(25);
                     remote_ride_radius = remote_ride_radius + 2.0;
 
                     if (remote_ride_radius >= 24.0) {
@@ -509,7 +509,7 @@ public class RemoteControlActivity1 extends Activity {
 
             while (forward_longClick) {
                 try {
-                    Thread.sleep(50);
+                    Thread.sleep(25);
                     forward_progress++;
 
 
@@ -524,7 +524,8 @@ public class RemoteControlActivity1 extends Activity {
                         public void run() {
                             tv_speed.setTextColor(getResources().getColor(R.color.C1));
 //                            tv_speed.setText(forward_progress / 10 + "");
-                            tv_speed.setText(v_right + "");
+//                            tv_speed.setText(v_right + "");
+                            tv_speed.setText(speedValue + "");
                         }
                     });
 
@@ -553,7 +554,7 @@ public class RemoteControlActivity1 extends Activity {
 
             while (!forward_longClick) {
                 try {
-                    Thread.sleep(50);
+                    Thread.sleep(25);
                     if (forward_progress <= 2) {
                         forward_progress = 0;
                         rightprogressbar.setProgress(forward_progress);
@@ -574,7 +575,8 @@ public class RemoteControlActivity1 extends Activity {
                         public void run() {
                             // tv_speed.setTextColor(getResources().getColor(R.color.C1));
 //                            tv_speed.setText(forward_progress / 10 + "");
-                            tv_speed.setText(v_right + "");
+//                            tv_speed.setText(v_right + "");
+                            tv_speed.setText(speedValue + "");
                         }
                     });
                 } catch (InterruptedException e) {
@@ -605,7 +607,7 @@ public class RemoteControlActivity1 extends Activity {
             //Log.e("remotedebug", "rotation " + rotation_angle);
             while (back_longClick) {
                 try {
-                    Thread.sleep(50);
+                    Thread.sleep(25);
                     backward_progress++;
                     leftprogressbar.setProgress(backward_progress);
                     if (backward_progress >= 100) {
@@ -618,7 +620,8 @@ public class RemoteControlActivity1 extends Activity {
                         public void run() {
                             tv_speed.setTextColor(getResources().getColor(R.color.C8));
 //                            tv_speed.setText(backward_progress / 10 + "");
-                            tv_speed.setText(v_left + "");
+//                            tv_speed.setText(v_left + "");
+                            tv_speed.setText(speedValue + "");
                         }
                     });
                 } catch (InterruptedException e) {
@@ -640,7 +643,7 @@ public class RemoteControlActivity1 extends Activity {
             }
             while (!back_longClick) {
                 try {
-                    Thread.sleep(50);
+                    Thread.sleep(25);
                     if (backward_progress <= 2) {
                         backward_progress = 0;
                         leftprogressbar.setProgress(backward_progress);
@@ -662,7 +665,8 @@ public class RemoteControlActivity1 extends Activity {
                         public void run() {
                             tv_speed.setTextColor(getResources().getColor(R.color.C8));
 //                            tv_speed.setText(backward_progress / 10 + "");
-                            tv_speed.setText(v_left + "");
+//                            tv_speed.setText(v_left + "");
+                            tv_speed.setText(speedValue + "");
                         }
                     });
                 } catch (InterruptedException e) {
@@ -839,8 +843,8 @@ public class RemoteControlActivity1 extends Activity {
 
             //try {
             //byte[] sendBytes= real_data.getBytes("UTF8");//data.getBytes("UTF8")
-
-
+            if (tv_speed != null)
+                tv_speed.setText(speedValue + "");
             remain_battery.setText(+batteryremain + " %");
 
             battery_progress.setProgress(batteryremain);
@@ -972,7 +976,7 @@ public class RemoteControlActivity1 extends Activity {
     }
 
     public void hexStringToByte(String hex) {
-        int len = (hex.length() / 3);
+        int len = (hex.length() / 3) + 1;
         byte[] result = new byte[len];
         char[] achar = hex.toCharArray();
         for (int i = 0; i < len; i++) {
@@ -989,7 +993,9 @@ public class RemoteControlActivity1 extends Activity {
         else isRide = false;
 
         //odometer_range = result[6];
-
+        if (result.length >= 12) {
+            speedValue = (result[10] + result[11]) / 2;
+        }
         //return result;
     }
 
@@ -1261,39 +1267,43 @@ public class RemoteControlActivity1 extends Activity {
         Log.e("remote", "sendbackData123");
         finish();
     }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventBus(CallStateOffEvent callStateOffEvent) {
         finish();
     }
+
     /**
      * 按钮-监听电话
      */
     public void createPhoneListener() {
-        TelephonyManager telephony = (TelephonyManager)getSystemService(
+        TelephonyManager telephony = (TelephonyManager) getSystemService(
                 Context.TELEPHONY_SERVICE);
         telephony.listen(new OnePhoneStateListener(),
                 PhoneStateListener.LISTEN_CALL_STATE);
     }
+
     public final static String TAG = "MyBroadcastReceiver";
+
     /**
      * 电话状态监听.
-     * @author stephen
      *
+     * @author stephen
      */
-    class OnePhoneStateListener extends PhoneStateListener{
+    class OnePhoneStateListener extends PhoneStateListener {
         @Override
         public void onCallStateChanged(int state, String incomingNumber) {
-            Log.i(TAG, "[Listener]电话号码:"+incomingNumber);
-            switch(state){
+            Log.i(TAG, "[Listener]电话号码:" + incomingNumber);
+            switch (state) {
                 case TelephonyManager.CALL_STATE_RINGING:
-                    Log.i(TAG, "[Listener]等待接电话:"+incomingNumber);
+                    Log.i(TAG, "[Listener]等待接电话:" + incomingNumber);
                     finish();
                     break;
                 case TelephonyManager.CALL_STATE_IDLE:
-                    Log.i(TAG, "[Listener]电话挂断:"+incomingNumber);
+                    Log.i(TAG, "[Listener]电话挂断:" + incomingNumber);
                     break;
                 case TelephonyManager.CALL_STATE_OFFHOOK:
-                    Log.i(TAG, "[Listener]通话中:"+incomingNumber);
+                    Log.i(TAG, "[Listener]通话中:" + incomingNumber);
                     break;
             }
             super.onCallStateChanged(state, incomingNumber);

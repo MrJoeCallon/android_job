@@ -39,8 +39,8 @@ public class SlideBar extends RelativeLayout {
 		gradientViewStartX = context.getResources().
 				getDimensionPixelSize(R.dimen.gradient_view_margin_left) + 8;
 		TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.SlideBar);
-		mMinVelocityXToUnlock = a.getInt(R.styleable.SlideBar_MinVelocityXToUnlock,2000) ;
-		mMinDistanceToUnlock = a.getInt(R.styleable.SlideBar_MinDistanceToUnlock,300) ;
+		mMinVelocityXToUnlock = a.getInt(R.styleable.SlideBar_MinVelocityXToUnlock,2100) ;
+		mMinDistanceToUnlock = a.getInt(R.styleable.SlideBar_MinDistanceToUnlock,400) ;
 		mLeftAnimationDuration = a.getInt(R.styleable.SlideBar_LeftAnimationDuratioin,250) ;
 		mRightAnimationDuration = a.getInt(R.styleable.SlideBar_RightAnimationDuratioin,300) ;
 		a.recycle();
@@ -97,10 +97,11 @@ public class SlideBar extends RelativeLayout {
 		if(mGradientViewIndicateLeft >= mMinDistanceToUnlock){
 			unlockSuccess();
 //			return;
-		}
-		//2. if user slide very fast, unlock
-		if(velocityTrigUnlock()){
+		} else {
+			//2. if user slide very fast, unlock
+			if (velocityTrigUnlock()) {
 //			return;
+			}
 		}
 		//otherwise reset the controls
 		resetControls();

@@ -3,6 +3,8 @@ package maojian.android.walnut;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.hardware.Camera;
 import android.hardware.Camera.PictureCallback;
 import android.os.Bundle;
@@ -18,10 +20,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -70,7 +69,6 @@ public class CameraActivity extends FragmentActivity implements OnClickListener,
     private boolean isVideo = false;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,13 +78,12 @@ public class CameraActivity extends FragmentActivity implements OnClickListener,
         isVideo = false;
 
 
-
         // Create our Preview view and set it as the content of our activity.
         FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
 //
 //        mCamera = Camera.open();;
 //
-       mCameraSurPreview = new CameraSurfacePreview(this);
+        mCameraSurPreview = new CameraSurfacePreview(this);
         preview.addView(mCameraSurPreview);
         EventBus.getDefault().register(this);
         // Add a listener to the Capture button
@@ -122,9 +119,7 @@ public class CameraActivity extends FragmentActivity implements OnClickListener,
         );
 
 
-
         //mVideoCapture = (ProgressBar) findViewById(R.id.loading_process_dialog_progressBar);
-
 
 
         //mVideoCapture.setVisibility(View.INVISIBLE);
@@ -133,15 +128,15 @@ public class CameraActivity extends FragmentActivity implements OnClickListener,
                 new View.OnTouchListener() {
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
-                        if(event.getAction() == MotionEvent.ACTION_UP){
+                        if (event.getAction() == MotionEvent.ACTION_UP) {
                             Log.d("test", "cansal button ---> cancel");
                             islongClick = false;
 
-                            if(isVideo){
+                            if (isVideo) {
                                 mCameraSurPreview.takeVideodone(CameraActivity.this);
                             }
 
-                            Log.e("videodebug","longpressing end");
+                            Log.e("videodebug", "longpressing end");
                         }
 
                         return false;
@@ -198,8 +193,6 @@ public class CameraActivity extends FragmentActivity implements OnClickListener,
         );
 
 
-
-
     }
 
     Runnable runnable = new Runnable() {
@@ -212,7 +205,7 @@ public class CameraActivity extends FragmentActivity implements OnClickListener,
                     Thread.sleep(50);
                     progress++;
                     mVideoCapture.setProgress(progress);
-                    if(progress==100) {
+                    if (progress == 100) {
                         progress = 0;
                         mVideoCapture.setProgress(progress);
                         break;
@@ -241,14 +234,16 @@ public class CameraActivity extends FragmentActivity implements OnClickListener,
 
     }
 
+    private int rotationNew = -1;
+
     private final void startOrientationChangeListener() {
         mOrientationListener = new OrientationEventListener(this) {
             @Override
             public void onOrientationChanged(int rotation) {
-                if (((rotation >= 0) && (rotation <= 45)) || (rotation >= 315)||((rotation>=135)&&(rotation<=225))) {//portrait
+                rotationNew = rotation;
+                if (((rotation >= 0) && (rotation <= 45)) || (rotation >= 315) || ((rotation >= 135) && (rotation <= 225))) {//portrait
                     mCurrentOrient = true;
-                    if(mCurrentOrient!=mScreenProtrait)
-                    {
+                    if (mCurrentOrient != mScreenProtrait) {
                         mScreenProtrait = mCurrentOrient;
                         //OrientationChanged(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
                         camera_shading.getBackground().setAlpha(180);
@@ -256,11 +251,10 @@ public class CameraActivity extends FragmentActivity implements OnClickListener,
                         camera_switchorientation.setVisibility(View.VISIBLE);
                         Log.d(TAG, "Screen orientation changed from Landscape to Portrait!");
                     }
-                }
-                else if (((rotation > 45) && (rotation < 135))||((rotation>225)&&(rotation<315))) {//landscape
+                } else if (((rotation > 45) && (rotation < 135)) || ((rotation > 225) && (rotation < 315))) {//landscape
                     mCurrentOrient = false;
-                    if(mCurrentOrient!=mScreenProtrait)
-                    {
+                    if (mCurrentOrient != mScreenProtrait) {
+
                         mScreenProtrait = mCurrentOrient;
                         //OrientationChanged(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
                         camera_shading.getBackground().setAlpha(0);
@@ -274,17 +268,36 @@ public class CameraActivity extends FragmentActivity implements OnClickListener,
         mOrientationListener.enable();
     }
 
+    // Bitmap转换成byte[]
+    public byte[] Bitmap2Bytes(Bitmap bm) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bm.compress(Bitmap.CompressFormat.PNG, 80, baos);
+        return baos.toByteArray();
+    }
+
+    // byte[]转换成Bitmap
+    public Bitmap Bytes2Bitmap(byte[] b) {
+        if (b.length != 0) {
+            return BitmapFactory.decodeByteArray(b, 0, b.length);
+        }
+        return null;
+    }
+
     @Override
     public void onPictureTaken(byte[] data, Camera camera) {
 
         //save the picture to sdcard
         File pictureFile = getOutputMediaFile();
-        if (pictureFile == null){
+        if (pictureFile == null) {
             Log.d(TAG, "Error creating media file, check storage permissions: ");
             return;
         }
 
         try {
+            if (((rotationNew > 45) && (rotationNew < 135))) {
+                data = Bitmap2Bytes(rotateBitmap(Bytes2Bitmap(data), 180));
+            }
+
             FileOutputStream fos = new FileOutputStream(pictureFile);
             fos.write(data);
             fos.close();
@@ -300,24 +313,36 @@ public class CameraActivity extends FragmentActivity implements OnClickListener,
         //See if need to enable or not
         mCaptureButton.setEnabled(true);
 
-        if(!isVideo){
-        Intent intent = new Intent(CameraActivity.this, UploadActivity.class);
-        Log.e("abc","picturefile path: "+pictureFile.toString());
-        intent.putExtra("filepath", pictureFile.toString());
-        intent.putExtra("isVideo",false);
-        startActivity(intent);
-
-        }
-        else {
-            Log.e("abc","isVideo imagepath: "+pictureFile.toString()+"  Videopath: "+mCameraSurPreview.mRecAudioFile.getAbsolutePath());
+        if (!isVideo) {
             Intent intent = new Intent(CameraActivity.this, UploadActivity.class);
-            Log.e("abc","picturefile path: "+pictureFile.toString());
+            Log.e("abc", "picturefile path: " + pictureFile.toString());
+            intent.putExtra("filepath", pictureFile.toString());
+            intent.putExtra("isVideo", false);
+            startActivity(intent);
+
+        } else {
+            Log.e("abc", "isVideo imagepath: " + pictureFile.toString() + "  Videopath: " + mCameraSurPreview.mRecAudioFile.getAbsolutePath());
+            Intent intent = new Intent(CameraActivity.this, UploadActivity.class);
+            Log.e("abc", "picturefile path: " + pictureFile.toString());
             intent.putExtra("filepath", pictureFile.toString());
             intent.putExtra("isVideo", true);
-            intent.putExtra("VideoPath",mCameraSurPreview.mRecAudioFile.getAbsolutePath());
+            intent.putExtra("VideoPath", mCameraSurPreview.mRecAudioFile.getAbsolutePath());
             startActivity(intent);
         }
 
+    }
+
+    /**
+     * 图片旋转
+     *
+     * @param bmp    要旋转的图片
+     * @param degree 图片旋转的角度，负值为逆时针旋转，正值为顺时针旋转
+     * @return
+     */
+    public static Bitmap rotateBitmap(Bitmap bmp, float degree) {
+        Matrix matrix = new Matrix();
+        matrix.postRotate(degree);
+        return Bitmap.createBitmap(bmp, 0, 0, bmp.getWidth(), bmp.getHeight(), matrix, true);
     }
 
     @Override
@@ -330,14 +355,15 @@ public class CameraActivity extends FragmentActivity implements OnClickListener,
         }
     }
 
-    private File getOutputMediaFile(){
+    private File getOutputMediaFile() {
         //get the mobile Pictures directory
 
         //get the current time
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
 
-        return new File(BaseConstant.getAppPicFile() + "/IMAGE_"+ timeStamp + ".jpg");
+        return new File(BaseConstant.getAppPicFile() + "/IMAGE_" + timeStamp + ".jpg");
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
