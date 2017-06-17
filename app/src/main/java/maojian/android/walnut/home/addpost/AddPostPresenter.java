@@ -128,6 +128,8 @@ public class AddPostPresenter extends Presenter<AddPostView> {
 //        params.put("key", "AIzaSyAx3fxifl2kaAs8LAp4xvd7YcQndTitsF0");   &type=restaurant
         String url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + BaseConstant.latitude
                 + "," + BaseConstant.longitude + "&radius=1500&keyword=" + keyword + "&key=AIzaSyAx3fxifl2kaAs8LAp4xvd7YcQndTitsF0";
+//        String url = "https://apprest.walnuttech.co/index.php/mobile/index/getGoogleLocationList?location=" + BaseConstant.latitude
+//                + "," + BaseConstant.longitude + "&radius=1500&keyword=" + keyword + "&key=AIzaSyAx3fxifl2kaAs8LAp4xvd7YcQndTitsF0";
 
         // 发送请求
         mVolleyRequest.get(context, url,
