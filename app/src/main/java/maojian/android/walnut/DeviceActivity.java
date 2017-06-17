@@ -831,7 +831,80 @@ public class DeviceActivity extends Activity implements SlideBar.OnTriggerListen
         Log.e("locationdebug", "permissiongranted " + locationProvider.toString());
 //        }
 
+        SharedPreferences pref = getSharedPreferences("myActivityName", 0);
+        current_mode = pref.getInt("current_mode", 1);
+//        switch (current_mode) {
+//            case 1:
+//                speedMode.setProgress(10);
+//                break;
+//            case 2:
+//                speedMode.setProgress(50);
+//                break;
+//            case 3:
+//                speedMode.setProgress(90);
+//                break;
+//        }
+        Typeface facenew = Typeface.createFromAsset(DeviceActivity.this.getAssets(), "fonts/Brown-Regular.otf");
+        beginnerText.setTypeface(facenew);
+        sportText.setTypeface(facenew);
+        proText.setTypeface(facenew);
 
+        lock_signal = false;
+
+        if (current_mode == 1 || current_mode == 01) {
+
+            speedMode.setProgress(10);
+
+            beginnerText.setTextSize(15);
+            sportText.setTextSize(10);
+            proText.setTextSize(10);
+
+            beginnerText.setTextColor(Color.parseColor("#00EAAB"));
+            sportText.setTextColor(Color.parseColor("#727171"));
+            proText.setTextColor(Color.parseColor("#727171"));
+
+            byte array[] = {0, 01, 0, 0, 0};
+            Log.e("speedmodech", " " + speedmodeChara);
+
+            current_mode = 01;
+
+
+        } else if (current_mode == 2 || current_mode == 02) {
+
+            speedMode.setProgress(50);
+
+            beginnerText.setTextSize(10);
+            sportText.setTextSize(15);
+            proText.setTextSize(10);
+
+            beginnerText.setTextColor(Color.parseColor("#727171"));
+            sportText.setTextColor(Color.parseColor("#00EAAB"));
+            proText.setTextColor(Color.parseColor("#727171"));
+
+            byte array[] = {0, 02, 0, 0, 0};
+
+            Log.e("speedmodech", " " + speedmodeChara);
+
+            current_mode = 02;
+
+        } else if (current_mode == 2 || current_mode == 02) {
+
+            speedMode.setProgress(90);
+
+            beginnerText.setTextSize(10);
+            sportText.setTextSize(10);
+            proText.setTextSize(15);
+
+            beginnerText.setTextColor(Color.parseColor("#727171"));
+            sportText.setTextColor(Color.parseColor("#727171"));
+            proText.setTextColor(Color.parseColor("#00EAAB"));
+
+            byte array[] = {0, 03, 0, 0, 0};
+            Log.e("speedmodech", " " + speedmodeChara);
+
+            current_mode = 03;
+
+        }
     }
 
     //    Runnable self_exam_thread = new Runnable() {
@@ -918,6 +991,12 @@ public class DeviceActivity extends Activity implements SlideBar.OnTriggerListen
         super.onPause();
 
         Log.e("device debug", " device onpause");
+
+        final SharedPreferences pref = getApplicationContext().getSharedPreferences("myActivityName", 0);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putInt("current_mode", current_mode);
+        editor.commit();
+
 
         if (mConnected && pause_connect) {
             unregisterReceiver(mGattUpdateReceiver);
